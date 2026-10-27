@@ -1,0 +1,50 @@
+<view class="container">
+  <view class="page-header">
+    <view class="page-title">🛡 {{t.pages.compliance.title}}</view>
+    <view class="page-desc">{{t.pages.compliance.subtitle}}</view>
+  </view>
+
+  <view class="card">
+    <view class="form-item">
+      <text class="form-label">{{t.pages.compliance.name}}</text>
+      <input class="form-input" placeholder="{{t.pages.compliance.namePlaceholder}}" value="{{enterpriseName}}" bindinput="onInputName" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">{{t.pages.compliance.exportCountry}}</text>
+      <picker class="form-picker" mode="selector" range="{{countryLabels}}" value="{{countryIndex}}" bindchange="onPickCountry">
+        <view class="picker-text">{{countryLabels[countryIndex]}} ›</view>
+      </picker>
+    </view>
+    <view class="form-item">
+      <text class="form-label">{{t.pages.compliance.category}}</text>
+      <input class="form-input" placeholder="{{t.pages.compliance.categoryPlaceholder}}" value="{{category}}" bindinput="onInputCategory" />
+    </view>
+    <view class="submit-btn" bindtap="onSubmit">{{t.pages.compliance.generate}}</view>
+  </view>
+
+  <block wx:if="{{report}}">
+    <view class="card result-card">
+      <view class="card-title">📋 {{report.countryDisplay || report.country}} · {{report.category}}</view>
+      <view class="score-row">
+        <text class="score-num">{{report.score}}</text>
+        <text class="score-level">{{report.level}}</text>
+      </view>
+
+      <view class="report-block">
+        <view class="block-title">✅ {{t.pages.compliance.qualification}}</view>
+        <view class="block-line" wx:for="{{report.qualification}}" wx:key="*this">· {{item}}</view>
+      </view>
+      <view class="report-block">
+        <view class="block-title">💱 {{t.pages.compliance.tariff}}</view>
+        <view class="block-line" wx:for="{{report.tariffRisk}}" wx:key="*this">· {{item}}</view>
+      </view>
+      <view class="report-block">
+        <view class="block-title">🚫 {{t.pages.compliance.redline}}</view>
+        <view class="block-line warn" wx:for="{{report.customsRedline}}" wx:key="*this">· {{item}}</view>
+      </view>
+      <view class="suggestion">💡 {{report.suggestion}}</view>
+    </view>
+  </block>
+
+  <data-source />
+</view>

@@ -1,0 +1,37 @@
+.container { padding: 24rpx; }
+.page-header { margin-bottom: 16rpx; }
+.page-title { font-size: 38rpx; font-weight: 700; color: #1E4976; }
+.page-desc { font-size: 24rpx; color: #999; margin-top: 8rpx; }
+
+.role-tip { font-size: 24rpx; color: #1E4976; background: rgba(30, 73, 118,0.08); padding: 16rpx 20rpx; border-radius: 12rpx; margin-bottom: 24rpx; }
+
+.card { background: #FFF; border-radius: 20rpx; padding: 28rpx; margin-bottom: 24rpx; box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.06); }
+.card-title { font-size: 30rpx; font-weight: 600; color: #333; margin-bottom: 20rpx; }
+
+.heat-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 12rpx; }
+.heat-cell { border-radius: 12rpx; padding: 20rpx 8rpx; display: flex; flex-direction: column; align-items: center; }
+.heat-region { font-size: 22rpx; color: #FFF; }
+.heat-count { font-size: 36rpx; font-weight: 800; color: #FFF; margin-top: 4rpx; }
+.lv0 { background: #10B981; }
+.lv1 { background: #85CE61; }
+.lv2 { background: #F59E0B; }
+.lv3 { background: #EF4444; }
+
+.heat-legend { display: flex; justify-content: center; gap: 16rpx; margin-top: 20rpx; }
+.lg { font-size: 22rpx; color: #FFF; padding: 4rpx 18rpx; border-radius: 16rpx; }
+.lg.lv0 { background: #10B981; }
+.lg.lv1 { background: #85CE61; }
+.lg.lv2 { background: #F59E0B; }
+.lg.lv3 { background: #EF4444; }
+
+.cluster-item { padding: 20rpx 0; border-bottom: 1rpx solid #F5F5F5; }
+.cluster-item:last-child { border-bottom: none; }
+.cluster-head { display: flex; align-items: center; justify-content: space-between; }
+.cluster-region { font-size: 28rpx; font-weight: 600; color: #333; }
+.cluster-badge { font-size: 22rpx; padding: 4rpx 16rpx; border-radius: 16rpx; }
+.cluster-badge.high { color: #EF4444; background: rgba(245,108,108,0.12); }
+.cluster-badge.medium { color: #F59E0B; background: rgba(230,162,60,0.14); }
+.cluster-badge.low { color: #10B981; background: rgba(16, 185, 129,0.12); }
+.cluster-count { font-size: 24rpx; color: #999; margin: 8rpx 0; }
+.cluster-ent { font-size: 24rpx; color: #666; padding: 4rpx 0; }
+

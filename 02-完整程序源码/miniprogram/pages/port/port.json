@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "口岸通关画像",
+  "usingComponents": {
+    "data-source": "/components/data-source/data-source"
+  }
+}

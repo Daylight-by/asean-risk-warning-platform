@@ -1,0 +1,142 @@
+<view class="ty-page">
+  <!-- 启动闪屏 -->
+  <view class="splash-screen" wx:if="{{showSplash}}">
+    <view class="splash-skip" bindtap="onSkip">{{t.home.splashSkip}}</view>
+    <view class="splash-content">
+      <view class="splash-logo">
+        <view class="splash-logo-icon"></view>
+      </view>
+      <text class="splash-title">{{t.home.title}}</text>
+      <text class="splash-subtitle">ASEAN Risk Warning Platform</text>
+      <view class="splash-tagline">
+        <text>{{t.home.slogan}}</text>
+      </view>
+      <view class="splash-loader">
+        <view class="splash-dot"></view>
+        <view class="splash-dot"></view>
+        <view class="splash-dot"></view>
+      </view>
+    </view>
+  </view>
+
+  <block wx:if="{{!showSplash}}">
+    <!-- 头部：渐变 + 搜索胶囊 -->
+    <view class="ty-header">
+      <view class="ty-header-title">{{i18n.home.title}}</view>
+      <view class="language-pill" bindtap="onChooseLanguage">{{languageShort}} ▾</view>
+      <view class="status-pill status-live" style="margin-bottom: var(--space-md);">
+        <text class="dot"></text>
+        <text>{{i18n.home.live}}</text>
+      </view>
+      <view class="ty-search-pill tappable" bindtap="onGoSearch">
+        <view class="icon"></view>
+        <input class="ty-search-input" placeholder="{{i18n.home.search}}" disabled="{{true}}" bindtap="onGoSearch" />
+        <text class="go" catchtap="onGoSearch">{{i18n.home.searchBtn}}</text>
+      </view>
+    </view>
+
+    <!-- 核心功能：4 个大卡，与底部 Tab 不冲突，一屏直达高频任务 -->
+    <view class="ty-section">
+      <view class="ty-section-header">
+        <view class="bar"></view>
+        <text class="txt">{{i18n.home.core}}</text>
+        <text class="sub">{{i18n.home.coreSub}}</text>
+      </view>
+      <view class="core-grid">
+        <view
+          class="core-card tappable"
+          wx:for="{{coreFuncs}}"
+          wx:key="key"
+          data-path="{{item.path}}"
+          bindtap="onFuncTap"
+          style="--card-bg: {{item.bg}};"
+        >
+          <view class="core-card-icon">
+            <view class="ty-func-glyph glyph-{{item.key}}"></view>
+          </view>
+          <text class="core-card-title">{{item.text}}</text>
+          <text class="core-card-desc">{{item.desc}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 更多工具：横滑收纳（次要专业工具） -->
+    <view class="ty-section">
+      <view class="ty-section-header">
+        <view class="bar"></view>
+        <text class="txt">{{i18n.home.more}}</text>
+        <text class="sub">{{i18n.home.moreSub}}</text>
+      </view>
+      <scroll-view class="more-scroll" scroll-x enhanced show-scrollbar="{{false}}">
+        <view class="more-track">
+          <view
+            class="more-card tappable"
+            wx:for="{{moreFuncs}}"
+            wx:key="key"
+            data-path="{{item.path}}"
+            bindtap="onFuncTap"
+            style="--card-bg: {{item.bg}};"
+          >
+            <view class="more-card-icon">
+              <view class="ty-func-glyph glyph-{{item.key}}"></view>
+            </view>
+            <text class="more-card-text">{{item.text}}</text>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+
+    <!-- 数据概览 -->
+    <view class="ty-stats">
+      <view class="ty-stat"><text class="num">{{stats.enterpriseTotal}}</text><text class="lab">{{i18n.home.enterprises}}</text></view>
+      <view class="ty-stat"><text class="num">{{stats.warningTotal}}</text><text class="lab">{{i18n.home.risks}}</text></view>
+      <view class="ty-stat"><text class="num">{{stats.policyTotal}}</text><text class="lab">{{i18n.home.policies}}</text></view>
+      <view class="ty-stat"><text class="num">{{stats.countryCount}}</text><text class="lab">{{i18n.home.countries}}</text></view>
+    </view>
+
+    <!-- 风险动态 信息流 -->
+    <view class="ty-feed">
+      <view class="ty-feed-title">
+        <view class="bar"></view><text class="txt">{{i18n.home.riskNews}}</text>
+        <text class="more" bindtap="onGoWarning">{{i18n.home.moreText}}</text>
+      </view>
+      <view class="feed-translation-switch" wx:if="{{language !== 'zh'}}" bindtap="onToggleFeedOriginal">{{showOriginalFeed ? 'Show translation' : 'View original'}} · AI translation demo</view>
+      <view class="card ty-news tappable-card" wx:for="{{warnings}}" wx:key="id" bindtap="onGoWarning">
+        <view class="ty-news-row">
+          <text class="dot {{item.level}}"></text>
+          <view class="enterprise-name-stack"><text class="name">{{item.displayEnterpriseName || item.enterpriseName}}</text><text class="enterprise-original" wx:if="{{language !== 'zh' && item.displayEnterpriseName !== item.enterpriseName}}">{{item.enterpriseName}}</text></view>
+          <text class="lv {{item.level}}">{{item.levelText}}</text>
+        </view>
+        <view class="ty-news-content">{{showOriginalFeed ? item.original.content : item.displayContent}}</view>
+        <view class="feed-translation-meta" wx:if="{{item.translationMeta}}">{{item.translationMeta}}</view>
+      </view>
+      <view class="ty-empty" wx:if="{{warnings.length === 0}}">{{i18n.home.emptyRisk}}</view>
+    </view>
+
+    <!-- 政策速递 信息流 -->
+    <view class="ty-feed">
+      <view class="ty-feed-title">
+        <view class="bar"></view><text class="txt">{{i18n.home.policyNews}}</text>
+        <text class="more" bindtap="onGoPolicy">{{i18n.home.moreText}}</text>
+      </view>
+      <view class="feed-translation-switch" wx:if="{{language !== 'zh'}}" bindtap="onToggleFeedOriginal">{{showOriginalFeed ? 'Show translation' : 'View original'}} · AI translation demo</view>
+      <view class="card ty-news tappable-card" wx:for="{{policies}}" wx:key="id" bindtap="onGoPolicy">
+        <view class="ty-news-row">
+          <text class="flag">{{item.countryDisplay || item.country}}</text>
+          <text class="name">{{showOriginalFeed ? item.original.title : item.displayTitle}}</text>
+        </view>
+        <view class="ty-news-content">{{showOriginalFeed ? item.original.summary : item.displaySummary}}</view>
+        <view class="feed-translation-meta" wx:if="{{item.translationMeta}}">{{item.translationMeta}}</view>
+      </view>
+      <view class="ty-empty" wx:if="{{policies.length === 0}}">{{i18n.home.emptyPolicy}}</view>
+    </view>
+
+    <data-source />
+
+    <!-- AI 风控助手入口 -->
+    <view class="ai-fab" bindtap="onOpenAI">
+      <view class="ai-fab-icon"></view>
+      <text class="ai-fab-label">{{t.home.aiAssistant}}</text>
+    </view>
+  </block>
+</view>

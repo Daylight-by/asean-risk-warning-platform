@@ -1,0 +1,74 @@
+﻿[
+    {
+        "source_name":  "Guangxi Development and Reform Commission",
+        "source_url":  "https://fgw.gxzf.gov.cn/xwzx/xwfb/t25943100.shtml",
+        "fetch_url":  "http://fgw.gxzf.gov.cn/xwzx/xwfb/t25943100.shtml",
+        "raw_path":  "E:\\bisai\\data\\gx-port-2024-transport-raw-20260809.html",
+        "raw_sha256":  "A19D75C7306C2B591130A57A288BA2A2295C18A9B9D94AE8FFF27EA931E52B46",
+        "retrieved_at_utc":  "2026-08-09 13:58:39",
+        "facts":  [
+                      {
+                          "country_code":  "CN-GX",
+                          "unit":  "ton",
+                          "source_tag":  "gx-port-2024-transport",
+                          "country_name":  "Guangxi",
+                          "value":  206000000,
+                          "evidence":  "Official page reports 2024 Guangxi port cargo throughput of 206 million tons.",
+                          "metric":  "guangxi_port_cargo_throughput",
+                          "period":  "2024"
+                      },
+                      {
+                          "country_code":  "CN-GX",
+                          "unit":  "CNY",
+                          "source_tag":  "gx-port-2024-transport",
+                          "country_name":  "Guangxi",
+                          "value":  1210000000000,
+                          "evidence":  "Official page reports 2024 Guangxi port customs trade value of 1.21 trillion CNY.",
+                          "metric":  "guangxi_port_customs_trade_value",
+                          "period":  "2024"
+                      }
+                  ],
+        "quality_note":  "Official regional aggregate; not enterprise-level customs, tax, settlement or individual data."
+    },
+    {
+        "source_name":  "Guangxi Foreign Affairs Office",
+        "source_url":  "https://wsb.gxzf.gov.cn/xwyw_48149/dfws_48154/t19692909.shtml",
+        "fetch_url":  "http://wsb.gxzf.gov.cn/xwyw_48149/dfws_48154/t19692909.shtml",
+        "raw_path":  "E:\\bisai\\data\\gx-border-ports-2024-raw-20260809.html",
+        "raw_sha256":  "A10EBAEE8C7DBDDDA20EC939265FC8A991228EC7765103FA29792CA46C031640",
+        "retrieved_at_utc":  "2026-08-09 13:58:39",
+        "facts":  [
+                      {
+                          "country_code":  "CN-GX",
+                          "unit":  "ton",
+                          "source_tag":  "gx-border-ports-2024",
+                          "country_name":  "Youyiguan and Dongxing ports",
+                          "value":  5843000,
+                          "evidence":  "Official page reports 2024 international road cargo of 5.843 million tons.",
+                          "metric":  "youyiguan_dongxing_international_road_cargo",
+                          "period":  "2024"
+                      },
+                      {
+                          "country_code":  "CN-GX",
+                          "unit":  "vehicle_trip",
+                          "source_tag":  "gx-border-ports-2024",
+                          "country_name":  "Youyiguan and Dongxing ports",
+                          "value":  684000,
+                          "evidence":  "Official page reports 2024 entry-exit vehicles of more than 684 thousand trips.",
+                          "metric":  "youyiguan_dongxing_entry_exit_vehicles",
+                          "period":  "2024"
+                      },
+                      {
+                          "country_code":  "CN-GX",
+                          "unit":  "person_trip",
+                          "source_tag":  "gx-border-ports-2024",
+                          "country_name":  "Dongxing port",
+                          "value":  8581000,
+                          "evidence":  "Official page reports 2024 Dongxing port entry-exit persons of 8.581 million trips.",
+                          "metric":  "dongxing_entry_exit_persons",
+                          "period":  "2024"
+                      }
+                  ],
+        "quality_note":  "Official regional aggregate; not enterprise-level customs, tax, settlement or individual data."
+    }
+]

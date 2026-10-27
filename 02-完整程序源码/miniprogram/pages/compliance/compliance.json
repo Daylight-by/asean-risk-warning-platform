@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "边贸合规体检",
+  "usingComponents": {
+    "data-source": "/components/data-source/data-source"
+  }
+}

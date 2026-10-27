@@ -1,0 +1,7 @@
+[
+  {"creditCode":"91450000MA5KX0011A","enterpriseName":"广西南宁越海贸易有限公司","taxType":"出口退税","period":"2025Q4","refundAmount":128000,"status":"已退库","dataSource":"广西税务公开样例"},
+  {"creditCode":"91450600MA5KY0022B","enterpriseName":"东兴边贸通供应链有限公司","taxType":"出口退税","period":"2025Q4","refundAmount":86000,"status":"审核中","dataSource":"广西税务公开样例"},
+  {"creditCode":"91450800MA5KZ0033C","enterpriseName":"钦州港联运国际物流有限公司","taxType":"增值税","period":"2025Q4","refundAmount":0,"status":"已申报","dataSource":"广西税务公开样例"},
+  {"creditCode":"91450600MA5KY0044D","enterpriseName":"防城港东盟资源贸易行","taxType":"出口退税","period":"2025Q3","refundAmount":0,"status":"暂扣-低报核查","dataSource":"广西税务公开样例"},
+  {"creditCode":"91451000MA5KL0055E","enterpriseName":"百色靖西跨境农业合作社","taxType":"农业免税备案","period":"2025全年","refundAmount":0,"status":"已备案","dataSource":"广西税务公开样例"}
+]

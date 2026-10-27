@@ -1,0 +1,533 @@
+/* ===== AI 风控助手 · 深靛蓝商务科技风（与全局设计令牌统一）===== */
+.chat-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  box-sizing: border-box;
+  background: var(--c-bg);
+}
+
+/* ──────────── 顶部栏（渐变 + 几何装饰）──────────── */
+.chat-head {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx 28rpx 30rpx;
+  background: var(--gradient-primary);
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.chat-head-deco {
+  position: absolute;
+  width: 320rpx;
+  height: 320rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  top: -170rpx;
+  right: -110rpx;
+}
+.chat-head::after {
+  content: '';
+  position: absolute;
+  width: 220rpx;
+  height: 220rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  bottom: -110rpx;
+  left: -60rpx;
+}
+.chat-head-info { display: flex; align-items: center; position: relative; z-index: 1; }
+.chat-avatar {
+  width: 84rpx;
+  height: 84rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  border: 2rpx solid rgba(255, 255, 255, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 44rpx;
+  margin-right: 20rpx;
+}
+.chat-head-text { display: flex; flex-direction: column; }
+.chat-title-row { display: flex; align-items: center; }
+.chat-title {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #FFF;
+  letter-spacing: 1rpx;
+  text-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.15);
+}
+.chat-status {
+  display: flex;
+  align-items: center;
+  margin-left: 16rpx;
+  background: rgba(255, 255, 255, 0.16);
+  padding: 4rpx 14rpx;
+  border-radius: 999rpx;
+  font-size: 20rpx;
+  color: rgba(255, 255, 255, 0.92);
+}
+.chat-status-dot {
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 50%;
+  background: #34D399;
+  margin-right: 8rpx;
+  box-shadow: 0 0 8rpx #34D399;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+.chat-sub {
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.82);
+  margin-top: 6rpx;
+}
+.chat-clear {
+  position: relative;
+  z-index: 1;
+  font-size: 24rpx;
+  color: #FFF;
+  padding: 10rpx 24rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1rpx solid rgba(255, 255, 255, 0.25);
+  transition: background var(--duration-fast) ease;
+}
+.chat-clear:active { background: rgba(255, 255, 255, 0.3); }
+
+/* ──────────── 发送中顶部横幅 ──────────── */
+.chat-banner {
+  display: flex;
+  align-items: center;
+  padding: 14rpx 28rpx;
+  background: var(--c-primary-tint);
+  color: var(--c-primary);
+  font-size: 24rpx;
+  flex-shrink: 0;
+}
+.banner-dot {
+  width: 14rpx;
+  height: 14rpx;
+  border-radius: 50%;
+  background: var(--c-accent);
+  margin-right: 12rpx;
+  animation: bannerPulse 1s infinite ease-in-out;
+  box-shadow: 0 0 8rpx var(--c-accent);
+}
+.banner-text { font-weight: 500; }
+@keyframes bannerPulse {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* ──────────── 消息滚动区 ──────────── */
+.chat-scroll {
+  flex: 1;
+  padding: 28rpx 24rpx 16rpx;
+  box-sizing: border-box;
+}
+
+/* ──────────── 空状态 ──────────── */
+.chat-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60rpx 40rpx 30rpx;
+}
+.chat-empty-avatar {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 40rpx;
+  background: var(--gradient-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 72rpx;
+  margin-bottom: 30rpx;
+  box-shadow: var(--shadow-primary);
+}
+.chat-empty-tip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+}
+.chat-empty-tip text {
+  font-size: 28rpx;
+  color: var(--c-text-2);
+  line-height: 1.6;
+  text-align: center;
+}
+.chat-suggest-label {
+  align-self: flex-start;
+  margin: 44rpx 0 18rpx;
+  font-size: 24rpx;
+  font-weight: 700;
+  color: var(--c-text-3);
+  letter-spacing: 1rpx;
+  position: relative;
+  padding-left: 18rpx;
+}
+.chat-suggest-label::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6rpx;
+  bottom: 6rpx;
+  width: 6rpx;
+  border-radius: 3rpx;
+  background: var(--gradient-accent);
+}
+.chat-suggests {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+.chat-suggest {
+  display: flex;
+  align-items: center;
+  background: var(--c-card);
+  border: 1rpx solid var(--c-border-light);
+  border-radius: var(--radius-md);
+  padding: 22rpx 24rpx;
+  box-shadow: var(--shadow-xs);
+  transition: all var(--duration-fast) ease;
+}
+.chat-suggest:active {
+  background: var(--c-primary-tint);
+  transform: scale(0.99);
+}
+.suggest-icon { font-size: 30rpx; margin-right: 16rpx; }
+.suggest-text { font-size: 27rpx; color: var(--c-text); }
+
+/* ──────────── 消息行 ──────────── */
+.msg-row {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 30rpx;
+  animation: msgIn var(--duration-slow) var(--ease-out-expo);
+}
+.msg-user { flex-direction: row-reverse; }
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(16rpx); }
+  to { opacity: 1; transform: none; }
+}
+.msg-avatar {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+  flex-shrink: 0;
+}
+.avatar-ai {
+  background: var(--c-accent-light);
+  border: 1rpx solid rgba(0, 191, 165, 0.25);
+}
+.avatar-user {
+  background: var(--gradient-primary);
+}
+.msg-bubble {
+  max-width: 80%;
+  margin: 0 16rpx;
+  padding: 22rpx 26rpx;
+  border-radius: 24rpx;
+  font-size: 28rpx;
+  line-height: 1.7;
+  word-break: break-word;
+  box-sizing: border-box;
+  box-shadow: var(--shadow-sm);
+}
+.bubble-ai {
+  background: var(--c-card);
+  border: 1rpx solid var(--c-border-light);
+  border-top-left-radius: 6rpx;
+  color: var(--c-text);
+}
+.bubble-user {
+  background: var(--gradient-primary);
+  color: #FFF;
+  border-top-right-radius: 6rpx;
+  box-shadow: var(--shadow-primary);
+}
+.msg-text { white-space: pre-wrap; }
+
+/* 输入中三点动画 */
+.typing { display: flex; align-items: center; gap: 8rpx; height: 36rpx; }
+.typing text {
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+  background: var(--c-text-3);
+  animation: typingBounce 1.2s infinite ease-in-out;
+}
+.typing text:nth-child(2) { animation-delay: 0.2s; }
+.typing text:nth-child(3) { animation-delay: 0.4s; }
+@keyframes typingBounce {
+  0%, 100% { transform: translateY(0); opacity: 0.4; }
+  50% { transform: translateY(-10rpx); opacity: 1; }
+}
+
+/* 执行中 loading */
+.exec-loading {
+  display: flex;
+  align-items: center;
+  margin-top: 16rpx;
+  font-size: 24rpx;
+}
+.exec-spinner {
+  width: 26rpx;
+  height: 26rpx;
+  margin-right: 12rpx;
+  border: 3rpx solid var(--c-border);
+  border-top-color: var(--c-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+.exec-text { color: var(--c-primary); font-weight: 500; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ──────────── 结果卡（青色左条强调）──────────── */
+.card {
+  margin-top: 18rpx;
+  background: var(--c-surface);
+  border: 1rpx solid var(--c-border-light);
+  border-left: 6rpx solid var(--c-accent);
+  border-radius: var(--radius-sm);
+  padding: 22rpx 24rpx;
+  box-sizing: border-box;
+}
+.card-title {
+  font-size: 26rpx;
+  font-weight: 700;
+  color: var(--c-primary);
+  margin-bottom: 14rpx;
+}
+.card-head { display: flex; align-items: center; margin-bottom: 12rpx; }
+.card-icon { font-size: 30rpx; margin-right: 10rpx; }
+.card-desc {
+  font-size: 25rpx;
+  color: var(--c-text-2);
+  line-height: 1.6;
+}
+.card-more {
+  display: block;
+  margin-top: 14rpx;
+  font-size: 24rpx;
+  color: var(--c-primary);
+  font-weight: 500;
+}
+
+/* 列表行 */
+.card-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16rpx 4rpx;
+  border-top: 1rpx solid var(--c-divider);
+}
+.card-row:first-of-type { border-top: none; padding-top: 4rpx; }
+.row-name {
+  flex: 1;
+  font-size: 26rpx;
+  color: var(--c-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 16rpx;
+}
+.row-tag {
+  font-size: 22rpx;
+  color: var(--c-primary);
+  background: var(--c-primary-tint);
+  padding: 4rpx 12rpx;
+  border-radius: var(--radius-xs);
+  margin-right: 10rpx;
+  flex-shrink: 0;
+}
+.row-badge {
+  font-size: 22rpx;
+  padding: 6rpx 16rpx;
+  border-radius: 999rpx;
+  flex-shrink: 0;
+  font-weight: 600;
+}
+.row-badge.ok, .score-level.ok { background: rgba(16,185,129,0.12); color: #10B981; }
+.row-badge.warn, .score-level.warn { background: rgba(245,158,11,0.14); color: #F59E0B; }
+.row-badge.bad, .score-level.bad { background: rgba(239,68,68,0.12); color: #EF4444; }
+
+/* 评分卡 */
+.score-card .score-main {
+  display: flex;
+  align-items: baseline;
+  margin: 8rpx 0 16rpx;
+}
+.score-num {
+  font-size: 60rpx;
+  font-weight: 800;
+  color: var(--c-primary);
+  line-height: 1;
+  margin-right: 16rpx;
+  letter-spacing: -2rpx;
+}
+.score-level {
+  font-size: 24rpx;
+  padding: 6rpx 18rpx;
+  border-radius: 999rpx;
+  font-weight: 600;
+}
+.score-subs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  margin-top: 8rpx;
+}
+.score-sub {
+  font-size: 22rpx;
+  color: var(--c-text-2);
+  background: var(--c-card);
+  border: 1rpx solid var(--c-border-light);
+  border-radius: 14rpx;
+  padding: 8rpx 16rpx;
+}
+
+/* 确认卡 / 结果动作卡 */
+.confirm-card {
+  background: var(--c-primary-tint);
+  border-color: rgba(30, 73, 118, 0.18);
+  border-left-color: var(--c-primary);
+}
+.confirm-card .card-body {
+  display: flex;
+  flex-direction: column;
+  margin: 8rpx 0 18rpx;
+}
+.confirm-action { font-size: 28rpx; color: var(--c-text); font-weight: 700; }
+.confirm-target { font-size: 24rpx; color: var(--c-text-2); margin-top: 8rpx; }
+
+.card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16rpx;
+  margin-top: 8rpx;
+}
+.btn {
+  font-size: 26rpx;
+  padding: 14rpx 34rpx;
+  border-radius: 999rpx;
+  font-weight: 600;
+  transition: transform var(--duration-fast) ease;
+}
+.btn-cancel {
+  background: var(--c-card);
+  color: var(--c-text-2);
+  border: 1rpx solid var(--c-border);
+}
+.btn-ok {
+  background: var(--gradient-primary);
+  color: #FFF;
+  box-shadow: var(--shadow-primary);
+}
+.btn-ok:active { transform: scale(0.97); }
+
+/* 成功 / 报告卡 */
+.ok-card {
+  background: var(--c-success-light);
+  border-color: var(--c-success-border);
+  border-left-color: var(--c-success);
+}
+.ok-card .card-title { color: var(--c-success); }
+
+/* 错误卡 */
+.err-card {
+  background: var(--c-danger-light);
+  border-color: var(--c-danger-border);
+  border-left-color: var(--c-danger);
+}
+.err-text { color: var(--c-danger); }
+
+/* 错误 + 重试（纯对话失败） */
+.msg-err {
+  margin-top: 14rpx;
+  display: flex;
+  align-items: center;
+  font-size: 24rpx;
+}
+.msg-err-text { color: var(--c-danger); }
+.msg-retry {
+  margin-left: 18rpx;
+  color: var(--c-primary);
+  background: var(--c-primary-tint);
+  padding: 8rpx 22rpx;
+  border-radius: 999rpx;
+  font-weight: 600;
+}
+
+/* 底部免责声明 */
+.chat-disclaimer {
+  text-align: center;
+  font-size: 20rpx;
+  color: var(--c-text-3);
+  padding: 20rpx 40rpx 8rpx;
+  opacity: 0.8;
+}
+
+/* ──────────── 底部输入栏 ──────────── */
+.chat-input-bar {
+  display: flex;
+  align-items: flex-end;
+  padding: 18rpx 24rpx;
+  padding-bottom: calc(18rpx + env(safe-area-inset-bottom));
+  background: var(--c-card);
+  border-top: 1rpx solid var(--c-border-light);
+  box-shadow: 0 -4rpx 16rpx rgba(26, 35, 50, 0.04);
+  flex-shrink: 0;
+}
+.chat-input {
+  flex: 1;
+  min-height: 76rpx;
+  max-height: 200rpx;
+  background: var(--c-surface);
+  border: 1rpx solid var(--c-border-light);
+  border-radius: 38rpx;
+  padding: 18rpx 28rpx;
+  font-size: 28rpx;
+  color: var(--c-text);
+  line-height: 1.4;
+  box-sizing: border-box;
+}
+.chat-input-ph { color: var(--c-placeholder); }
+.chat-send {
+  margin-left: 16rpx;
+  height: 76rpx;
+  min-width: 132rpx;
+  padding: 0 36rpx;
+  border-radius: 999rpx;
+  background: #E5ECF3;
+  color: #9AA9B8;
+  font-size: 28rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--duration-fast) ease;
+}
+.chat-send.active {
+  background: var(--gradient-primary);
+  color: #FFF;
+  box-shadow: var(--shadow-primary);
+}
+.chat-send.active:active { transform: scale(0.96); }
+
+/* 全局脉冲（状态点） */
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}

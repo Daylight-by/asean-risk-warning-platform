@@ -1,0 +1,63 @@
+<view class="container">
+  <view class="page-header">
+    <view class="page-title">🚢 {{t.pages.port.title}}</view>
+    <view class="page-desc">{{t.pages.port.subtitle}}</view>
+  </view>
+
+  <view class="search-bar">
+    <input class="search-input" placeholder="{{t.pages.port.placeholder}}" value="{{keyword}}" bindinput="onInput" bindconfirm="onSearch" confirm-type="search" />
+    <view class="search-btn" bindtap="onSearch">{{t.common.query}}</view>
+  </view>
+
+  <block wx:if="{{profile}}">
+    <view class="card">
+      <view class="card-title">{{t.pages.port.basic}}</view>
+      <view class="info-row"><text class="info-label">{{t.common.enterprise}}</text><text class="info-value">{{profile.enterpriseName}}</text></view>
+      <view class="info-row"><text class="info-label">{{t.pages.port.credit}}</text><text class="info-value">{{profile.creditCode}}</text></view>
+      <view class="info-row"><text class="info-label">{{t.pages.port.mainPort}}</text><text class="info-value">{{profile.primaryPort}}</text></view>
+    </view>
+
+    <view class="card" wx:if="{{profile.ports && profile.ports.length}}">
+      <view class="card-title">📍 {{t.pages.port.profile}}</view>
+      <view class="port-item" wx:for="{{profile.ports}}" wx:key="name">
+        <view class="port-name">{{item.name}}</view>
+        <view class="port-metrics">
+          <view class="metric"><text class="m-label">{{t.pages.port.clearance}}</text><text class="m-value">{{item.clearanceAvgDays}}</text></view>
+          <view class="metric"><text class="m-label">{{t.pages.port.inspection}}</text><text class="m-value">{{item.inspectRate}}</text></view>
+          <view class="metric"><text class="m-label">{{t.pages.port.quota}}</text><text class="m-value">{{item.smallTradeQuota}}</text></view>
+          <view class="metric"><text class="m-label">{{t.pages.port.origin}}</text><text class="m-value {{item.originCompliance === '合规' ? 'ok' : 'bad'}}">{{item.originCompliance}}</text></view>
+        </view>
+      </view>
+    </view>
+
+    <view class="card">
+      <view class="card-title">💱 {{t.pages.port.settlement}}</view>
+      <view class="settle-score">
+        <text class="settle-num">{{profile.settlementScore}}</text>
+        <text class="settle-level">{{profile.settlementLevel}}</text>
+      </view>
+      <view class="settle-records">
+        <view class="settle-item" wx:for="{{profile.settlementRecords}}" wx:key="label">
+          <text class="s-label">{{item.label}}</text>
+          <text class="s-value">{{item.value}}</text>
+          <text class="s-status {{item.status === '正常' ? 'ok' : 'bad'}}">{{item.status}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="card">
+      <view class="card-title">⚠ {{t.pages.port.riskTags}}</view>
+      <view class="tag-wrap">
+        <view class="risk-tag {{item.level}}" wx:for="{{profile.riskTags}}" wx:key="text">{{item.text}}</view>
+      </view>
+    </view>
+  </block>
+
+  <view class="empty-state" wx:elif="{{!loading}}">
+    <text class="icon">🚢</text>
+    <text class="text">{{t.pages.port.empty}}</text>
+    <text class="text-sub">{{t.pages.port.emptySub}}</text>
+  </view>
+
+  <data-source />
+</view>

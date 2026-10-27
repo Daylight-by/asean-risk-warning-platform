@@ -1,0 +1,46 @@
+<view class="container">
+  <view class="page-header">
+    <view class="page-title">🕸 {{t.pages.graph.title}}</view>
+    <view class="page-desc">{{t.pages.graph.subtitle}}</view>
+  </view>
+
+  <view class="search-bar">
+    <input class="search-input" placeholder="{{t.pages.graph.placeholder}}" value="{{keyword}}" bindinput="onInput" bindconfirm="onSearch" confirm-type="search" />
+    <view class="search-btn" bindtap="onSearch">{{t.common.analyze}}</view>
+  </view>
+
+  <block wx:if="{{graph}}">
+    <view class="card">
+      <view class="card-title">🔗 {{t.pages.graph.chain}}</view>
+      <view class="chain">
+        <view class="chain-node {{item.risk}}" wx:for="{{graph.nodes}}" wx:key="name">
+          <view class="chain-layer">{{item.layer}}</view>
+          <view class="chain-name">{{item.name}}</view>
+          <view class="chain-country">{{item.country}}</view>
+          <view class="chain-note">{{item.note}}</view>
+          <view class="chain-arrow" wx:if="{{index < graph.nodes.length - 1}}">▼</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="card">
+      <view class="card-title">🚨 {{t.pages.graph.risks}}</view>
+      <view class="risk-line" wx:for="{{graph.links}}" wx:key="*this">
+        <text class="risk-dot">●</text><text class="risk-text">{{item}}</text>
+      </view>
+    </view>
+
+    <view class="alert-box">
+      <text class="alert-icon">⚠</text>
+      <text class="alert-text">{{graph.summary}}</text>
+    </view>
+  </block>
+
+  <view class="empty-state" wx:elif="{{!loading}}">
+    <text class="icon">🕸</text>
+    <text class="text">{{t.pages.graph.empty}}</text>
+    <text class="text-sub">{{t.pages.graph.emptySub}}</text>
+  </view>
+
+  <data-source />
+</view>

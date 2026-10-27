@@ -1,0 +1,38 @@
+<view class="container">
+  <view class="page-header">
+    <view class="page-title">🗺 {{t.pages.regulate.title}}</view>
+    <view class="page-desc">{{t.pages.regulate.subtitle}}</view>
+  </view>
+
+  <view class="role-tip">👮 {{t.pages.regulate.roleTip}}</view>
+
+  <view class="card">
+    <view class="card-title">🌡 {{t.pages.regulate.heatmap}}</view>
+    <view class="heat-grid">
+      <view class="heat-cell lv{{item.level}}" wx:for="{{heatmap}}" wx:key="region">
+        <text class="heat-region">{{item.region}}</text>
+        <text class="heat-count">{{item.count}}</text>
+      </view>
+    </view>
+    <view class="heat-legend">
+      <text class="lg lv0">{{t.pages.regulate.levels[0]}}</text>
+      <text class="lg lv1">{{t.pages.regulate.levels[1]}}</text>
+      <text class="lg lv2">{{t.pages.regulate.levels[2]}}</text>
+      <text class="lg lv3">{{t.pages.regulate.levels[3]}}</text>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">🚨 {{t.pages.regulate.clusters}}</view>
+    <view class="cluster-item" wx:for="{{clusters}}" wx:key="region">
+      <view class="cluster-head">
+        <text class="cluster-region">{{item.region}}</text>
+        <text class="cluster-badge {{item.level}}">{{item.level === 'high' ? t.common.high : item.level === 'medium' ? t.common.medium : t.common.low}}</text>
+      </view>
+      <view class="cluster-count">{{t.pages.regulate.clusterCount}} {{item.count}} {{t.pages.regulate.unit}}</view>
+      <view class="cluster-ent" wx:for="{{item.enterprises}}" wx:for-item="ent" wx:key="*this">· {{ent}}</view>
+    </view>
+  </view>
+
+  <data-source />
+</view>

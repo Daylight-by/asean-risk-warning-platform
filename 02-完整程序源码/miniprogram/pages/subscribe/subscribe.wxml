@@ -1,0 +1,31 @@
+<view class="container">
+  <!-- 页面头部 -->
+  <view class="page-header">
+    <view class="page-title">📌 {{t.pages.subscribe.title}}</view>
+    <view class="page-desc">{{t.pages.subscribe.subtitle}}</view>
+  </view>
+
+  <!-- 订阅列表 -->
+  <view wx:if="{{list.length > 0}}">
+    <view class="sub-item card" wx:for="{{list}}" wx:key="enterpriseId">
+      <view class="sub-icon">🏢</view>
+      <view class="sub-body" bindtap="onView" data-id="{{item.enterpriseId}}" data-name="{{item.enterpriseName}}">
+        <view class="sub-name">{{item.enterpriseName}}</view>
+        <view class="sub-id">{{item.enterpriseId}}</view>
+      </view>
+      <view class="sub-actions">
+        <view class="sub-btn view" bindtap="onView" data-id="{{item.enterpriseId}}" data-name="{{item.enterpriseName}}">{{t.common.view}}</view>
+        <view class="sub-btn unsub" bindtap="onUnsubscribe" data-id="{{item.enterpriseId}}" data-name="{{item.enterpriseName}}">{{t.pages.subscribe.unsubscribe}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{list.length === 0}}">
+    <text class="icon">📌</text>
+    <text class="text">{{t.pages.subscribe.empty}}</text>
+    <text class="text-sub">{{t.pages.subscribe.emptySub}}</text>
+  </view>
+
+  <data-source />
+</view>

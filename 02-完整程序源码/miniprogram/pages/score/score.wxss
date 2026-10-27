@@ -1,0 +1,438 @@
+.container {
+  padding: 0 24rpx 24rpx;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background: #F4F7FA;
+}
+
+/* 企业头部 - 优化 */
+.enterprise-header {
+  position: relative;
+  margin: 0 -24rpx 32rpx;
+  padding: 0 24rpx 48rpx;
+  overflow: hidden;
+}
+
+.enterprise-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 280rpx;
+  background: #1E4976;
+  border-radius: 0 0 40rpx 40rpx;
+}
+
+.enterprise-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 64rpx 32rpx 0;
+}
+
+.enterprise-icon {
+  font-size: 72rpx;
+  margin-right: 24rpx;
+  width: 96rpx;
+  height: 96rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 24rpx;
+}
+
+.enterprise-info {
+  flex: 1;
+  padding-top: 16rpx;
+}
+
+.enterprise-name {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #FFF;
+  margin-bottom: 8rpx;
+  display: block;
+}
+
+.enterprise-id {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.85);
+  display: block;
+}
+
+/* 区域标题 - 优化 */
+.section-header {
+  margin-bottom: 28rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.section-subtitle {
+  font-size: 24rpx;
+  color: #999;
+  display: block;
+}
+
+/* 仪表盘 - 优化 */
+.score-section {
+  text-align: center;
+  margin-bottom: 28rpx;
+  padding: 32rpx 28rpx;
+}
+
+.gauge-container {
+  position: relative;
+  width: 360rpx;
+  height: 360rpx;
+  margin: 0 auto 28rpx;
+}
+
+.gauge-canvas {
+  width: 360rpx;
+  height: 360rpx;
+}
+
+.gauge-score {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.score-number {
+  font-size: 72rpx;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.score-unit {
+  display: block;
+  font-size: 26rpx;
+  color: #999;
+  margin-top: 8rpx;
+}
+
+.risk-level-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 12rpx 32rpx;
+  border-radius: 30rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+}
+
+.risk-badge-high {
+  background: #EF4444;
+  color: #FFF;
+}
+
+.risk-badge-medium {
+  background: #F59E0B;
+  color: #FFF;
+}
+
+.risk-badge-low {
+  background: #10B981;
+  color: #FFF;
+}
+
+.badge-icon {
+  font-size: 28rpx;
+  margin-right: 8rpx;
+}
+
+.badge-text {
+  font-size: 28rpx;
+}
+
+.risk-desc {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.8;
+  padding: 20rpx;
+  background: #FAFAFA;
+  border-radius: 12rpx;
+  display: flex;
+  align-items: flex-start;
+}
+
+.desc-icon {
+  font-size: 28rpx;
+  margin-right: 8rpx;
+}
+
+/* 雷达图 - 优化 */
+.radar-section {
+  margin-bottom: 28rpx;
+  padding: 32rpx 28rpx;
+}
+
+.radar-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32rpx;
+}
+
+.radar-canvas {
+  width: 500rpx;
+  height: 500rpx;
+}
+
+/* 维度网格 - 新增 */
+.dimensions-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.dimension-card {
+  display: flex;
+  flex-direction: column;
+  padding: 20rpx;
+  background: #FAFAFA;
+  border-radius: 16rpx;
+  transition: all 0.3s ease;
+}
+
+.dimension-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+
+.dimension-dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  margin-right: 12rpx;
+}
+
+.dimension-name {
+  font-size: 26rpx;
+  color: #333;
+  font-weight: 500;
+  flex: 1;
+}
+
+.dimension-score {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 12rpx;
+}
+
+.score-value {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #333;
+  margin-right: 4rpx;
+}
+
+.score-suffix {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.dimension-bar {
+  height: 12rpx;
+  background: #F0F0F0;
+  border-radius: 6rpx;
+  overflow: hidden;
+}
+
+.dimension-fill {
+  height: 100%;
+  border-radius: 6rpx;
+  transition: width 0.6s ease;
+}
+
+/* 风险标签 - 优化 */
+.tags-section {
+  margin-bottom: 28rpx;
+  padding: 32rpx 28rpx;
+}
+
+.tags-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.risk-tag-item {
+  display: flex;
+  align-items: center;
+  padding: 12rpx 20rpx;
+  border-radius: 16rpx;
+  font-size: 24rpx;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.risk-tag-item:active {
+  transform: scale(0.95);
+}
+
+.tag-high {
+  background: #FEF0F0;
+  color: #EF4444;
+  border: 1rpx solid #FBC4C4;
+}
+
+.tag-medium {
+  background: #FDF6EC;
+  color: #F59E0B;
+  border: 1rpx solid #F5DAB1;
+}
+
+.tag-low {
+  background: #F0F9EB;
+  color: #10B981;
+  border: 1rpx solid #C2E7B0;
+}
+
+.tag-icon {
+  font-size: 24rpx;
+  margin-right: 8rpx;
+}
+
+.tag-name {
+  font-size: 24rpx;
+}
+
+/* 操作按钮 - 优化 */
+.action-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+  margin-bottom: 32rpx;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 32rpx;
+  border-radius: 20rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  border: none;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.action-btn::after {
+  border: none;
+}
+
+.btn-report {
+  background: #1E4976;
+  color: #FFF;
+  box-shadow: 0 4rpx 16rpx rgba(31, 35, 41, 0.10);
+}
+
+.btn-report:active {
+  transform: scale(0.98);
+  box-shadow: 0 2rpx 8rpx rgba(31, 35, 41, 0.08);
+}
+
+.btn-subscribe {
+  background: #FFF;
+  color: #333;
+  border: 2rpx solid #E0E0E0;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
+}
+
+.btn-subscribe.subscribed {
+  background: #F0F9EB;
+  border-color: #10B981;
+  color: #10B981;
+  box-shadow: 0 4rpx 12rpx rgba(16, 185, 129, 0.2);
+}
+
+.btn-icon {
+  margin-right: 12rpx;
+  font-size: 36rpx;
+}
+
+.btn-text {
+  font-size: 30rpx;
+}
+
+/* 数据来源声明 - 优化 */
+.data-source {
+  margin-top: 48rpx;
+  padding: 32rpx 24rpx;
+  background: #FFF;
+  border-radius: 20rpx;
+  text-align: center;
+}
+
+.source-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16rpx;
+}
+
+.source-icon {
+  font-size: 28rpx;
+  margin-right: 8rpx;
+}
+
+.source-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #666;
+}
+
+.source-content {
+  font-size: 22rpx;
+  color: #999;
+  line-height: 1.8;
+  margin-bottom: 16rpx;
+}
+
+.source-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+  padding-top: 16rpx;
+  border-top: 1rpx solid #F0F0F0;
+}
+
+.update-freq {
+  font-size: 20rpx;
+  color: #B0B0B0;
+}
+
+.source-notice {
+  font-size: 20rpx;
+  color: #CCC;
+}
+
+/* 分国别差异化评分模型 */
+.country-bar {
+  display: flex;
+  align-items: center;
+  background: #FFF;
+  border-radius: 16rpx;
+  padding: 20rpx 24rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.06);
+}
+.country-bar-label { font-size: 26rpx; color: #333; font-weight: 600; }
+.country-picker { flex: 1; margin: 0 16rpx; }
+.country-picker-text { font-size: 26rpx; color: #1E4976; font-weight: 600; }
+.country-bar-note { font-size: 20rpx; color: #999; background: rgba(30, 73, 118,0.08); padding: 4rpx 14rpx; border-radius: 16rpx; }
+

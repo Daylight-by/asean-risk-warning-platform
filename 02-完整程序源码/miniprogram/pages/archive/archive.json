@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "多语种跨境档案",
+  "usingComponents": {
+    "data-source": "/components/data-source/data-source"
+  }
+}

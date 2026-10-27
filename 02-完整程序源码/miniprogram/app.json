@@ -1,0 +1,66 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/search/search",
+    "pages/score/score",
+    "pages/report/report",
+    "pages/warning/warning",
+    "pages/policy/policy",
+    "pages/mine/mine",
+    "pages/dashboard/dashboard",
+    "pages/subscribe/subscribe",
+    "pages/port/port",
+    "pages/graph/graph",
+    "pages/archive/archive",
+    "pages/compliance/compliance",
+    "pages/regulate/regulate",
+    "pages/terminology/terminology",
+    "pages/dispute/dispute",
+    "pages/ai-chat/ai-chat"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "navigationBarTitleText": "东盟风控预警平台",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#F4F7FA",
+    "navigationStyle": "default",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "color": "#6B8299",
+    "selectedColor": "#1E4976",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/tab_home.png",
+        "selectedIconPath": "images/tab_home_active.png"
+      },
+      {
+        "pagePath": "pages/warning/warning",
+        "text": "风险",
+        "iconPath": "images/tab_warning.png",
+        "selectedIconPath": "images/tab_warning_active.png"
+      },
+      {
+        "pagePath": "pages/policy/policy",
+        "text": "资讯",
+        "iconPath": "images/tab_policy.png",
+        "selectedIconPath": "images/tab_policy_active.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "images/tab_mine.png",
+        "selectedIconPath": "images/tab_mine_active.png"
+      }
+    ]
+  },
+  "usingComponents": {
+    "data-source": "/components/data-source/data-source"
+  },
+  "sitemapLocation": "sitemap.json"
+}

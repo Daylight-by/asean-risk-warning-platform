@@ -1,0 +1,35 @@
+.ds-wrap {
+  background: #FFF;
+  border-radius: 20rpx;
+  padding: 24rpx;
+  margin-top: 12rpx;
+  text-align: center;
+}
+.ds-title {
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 16rpx;
+}
+.ds-badges {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  margin-bottom: 14rpx;
+}
+.ds-badge {
+  font-size: 20rpx;
+  color: #FFF;
+  padding: 6rpx 18rpx;
+  border-radius: 20rpx;
+}
+.ds-badge-1 { background: #1E4976; }
+.ds-badge-2 { background: #2563EB; }
+.ds-badge-3 { background: #10B981; }
+.ds-badge-4 { background: #7C5CBF; }
+.ds-note {
+  font-size: 20rpx;
+  color: #BBB;
+  line-height: 1.5;
+}

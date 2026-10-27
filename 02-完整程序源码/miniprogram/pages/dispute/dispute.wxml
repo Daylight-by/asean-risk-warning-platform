@@ -1,0 +1,92 @@
+<view class="page">
+  <view class="page-header">
+    <text class="page-title">{{t.pages.dispute.title}}</text>
+    <text class="page-subtitle">{{t.pages.dispute.subtitle}}</text>
+  </view>
+  
+  <!-- 类型筛选 -->
+  <scroll-view class="category-scroll" scroll-x>
+    <view class="category-list">
+      <view class="category-item {{activeType === '' ? 'active' : ''}}" bindtap="onTypeChange" data-type="">{{t.common.all}}</view>
+      <view class="category-item {{activeType === '合同纠纷' ? 'active' : ''}}" bindtap="onTypeChange" data-type="合同纠纷">{{t.pages.dispute.types[1]}}</view>
+      <view class="category-item {{activeType === '知识产权' ? 'active' : ''}}" bindtap="onTypeChange" data-type="知识产权">{{t.pages.dispute.types[2]}}</view>
+      <view class="category-item {{activeType === '产品质量' ? 'active' : ''}}" bindtap="onTypeChange" data-type="产品质量">{{t.pages.dispute.types[3]}}</view>
+      <view class="category-item {{activeType === '支付纠纷' ? 'active' : ''}}" bindtap="onTypeChange" data-type="支付纠纷">{{t.pages.dispute.types[4]}}</view>
+    </view>
+  </scroll-view>
+  
+  <!-- 智能匹配 -->
+  <view class="match-btn" bindtap="showMatchDialog">
+    <text class="match-icon"></text>
+    <text class="match-text">{{t.pages.dispute.match}}</text>
+  </view>
+  <view class="translation-switch" wx:if="{{language !== 'zh'}}" bindtap="onToggleOriginal">{{showOriginal ? t.pages.dispute.translationBack : t.pages.dispute.translationToggle}} · {{t.pages.dispute.translationDemo}}</view>
+  
+  <!-- 案例列表 -->
+  <view class="case-list">
+    <view class="case-card" wx:for="{{caseList}}" wx:key="id" bindtap="showDetail" data-index="{{index}}">
+      <view class="case-header">
+        <text class="case-no">{{item.caseNo}}</text>
+        <view class="case-type-tag">{{item.caseType}}</view>
+      </view>
+      <text class="case-title">{{showOriginal ? item.original.title : item.displayTitle}}</text>
+      <view class="case-meta">
+        <text class="case-countries">{{item.countries}}</text>
+        <text class="case-date">{{item.publishDate}}</text>
+      </view>
+      <text class="case-summary">{{showOriginal ? item.original.summary : item.displaySummary}}</text>
+      <text class="translation-meta" wx:if="{{item.translationMeta}}">{{item.translationMeta}}</text>
+      <view class="case-advice" wx:if="{{item.riskAdvice}}">
+        <text class="advice-label">💡 {{t.pages.dispute.advice}}</text>
+        <text class="advice-text">{{showOriginal ? item.original.riskAdvice : item.displayRiskAdvice}}</text>
+      </view>
+    </view>
+  </view>
+  
+  <view class="empty-state" wx:if="{{caseList.length === 0 && !loading}}">
+    <text class="empty-icon">⚖️</text>
+    <text class="empty-text">{{t.pages.dispute.empty}}</text>
+  </view>
+  
+  <!-- 智能匹配弹窗 -->
+  <view class="modal-mask" wx:if="{{showMatchModal}}" bindtap="hideMatchDialog">
+    <view class="modal-content" catchtap>
+      <text class="modal-title">{{t.pages.dispute.match}}</text>
+      <view class="modal-form">
+        <text class="form-label">{{t.pages.dispute.trade}}</text>
+        <input class="form-input" placeholder="{{t.pages.dispute.matchTradePlaceholder}}" value="{{matchForm.tradeCategory}}" bindinput="onMatchInput" data-field="tradeCategory" />
+        <text class="form-label">{{t.pages.dispute.partner}}</text>
+        <input class="form-input" placeholder="{{t.pages.dispute.matchPartnerPlaceholder}}" value="{{matchForm.countries}}" bindinput="onMatchInput" data-field="countries" />
+      </view>
+      <view class="modal-actions">
+        <button class="btn-cancel" bindtap="hideMatchDialog">{{t.common.cancel}}</button>
+        <button class="btn-confirm" bindtap="doMatch">{{t.pages.dispute.match}}</button>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 案例详情弹窗 -->
+  <view class="modal-mask" wx:if="{{showDetailModal}}" bindtap="hideDetail">
+    <view class="modal-content detail-modal" catchtap>
+      <text class="modal-title">{{detailCase.title}}</text>
+      <view class="detail-section">
+        <text class="section-label">{{t.pages.dispute.summary}}</text>
+        <text class="section-text">{{showOriginal ? detailCase.original.summary : detailCase.displaySummary}}</text>
+      </view>
+      <view class="detail-section">
+        <text class="section-label">{{t.pages.dispute.judgment}}</text>
+        <text class="section-text">{{showOriginal ? detailCase.original.judgment : detailCase.displayJudgment}}</text>
+      </view>
+      <view class="detail-section">
+        <text class="section-label">{{t.pages.dispute.advice}}</text>
+        <text class="section-text advice">{{showOriginal ? detailCase.original.riskAdvice : detailCase.displayRiskAdvice}}</text>
+      </view>
+      <view class="detail-footer">
+        <text>{{detailCase.court}} · {{detailCase.publishDate}}</text>
+      </view>
+      <button class="btn-close" bindtap="hideDetail">{{t.common.close}}</button>
+    </view>
+  </view>
+  
+  <data-source />
+</view>

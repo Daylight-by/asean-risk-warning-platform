@@ -1,0 +1,61 @@
+﻿{
+    "source_name":  "ASEAN Trade Repository",
+    "source_url":  "https://atr.asean.org/read/national-trade-repositories-asean-member-countries/60",
+    "retrieved_at_utc":  "2026-08-09 13:58:39",
+    "raw_html_path":  "E:\\bisai\\data\\atr-ntr-official-directory-20260809.html",
+    "raw_html_sha256":  "45A0BAC0851AF97CB8C4D3D0348CC0D110B7A660C1623B63978685AE2D22FB56",
+    "official_link_count":  10,
+    "links":  [
+                  {
+                      "country":  "Brunei Darussalam",
+                      "url":  "http://www.bdntr.gov.bn/",
+                      "verified_on_directory":  true
+                  },
+                  {
+                      "country":  "Cambodia",
+                      "url":  "http://www.cambodiantr.gov.kh",
+                      "verified_on_directory":  true
+                  },
+                  {
+                      "country":  "Indonesia",
+                      "url":  "http://www.insw.go.id/intr",
+                      "verified_on_directory":  true
+                  },
+                  {
+                      "country":  "Lao PDR",
+                      "url":  "http://www.laotradeportal.gov.la",
+                      "verified_on_directory":  true
+                  },
+                  {
+                      "country":  "Malaysia",
+                      "url":  "http://mytraderepository.customs.gov.my",
+                      "verified_on_directory":  true
+                  },
+                  {
+                      "country":  "Myanmar",
+                      "url":  "http://www.myanmartradeportal.gov.mm",
+                      "verified_on_directory":  true
+                  },
+                  {
+                      "country":  "Philippines",
+                      "url":  "http://pntr.gov.ph/",
+                      "verified_on_directory":  true
+                  },
+                  {
+                      "country":  "Singapore",
+                      "url":  "http://www.fta.gov.sg/",
+                      "verified_on_directory":  true
+                  },
+                  {
+                      "country":  "Thailand",
+                      "url":  "http://www.thailandntr.com/",
+                      "verified_on_directory":  true
+                  },
+                  {
+                      "country":  "Vietnam",
+                      "url":  "http://ntr.moit.gov.vn",
+                      "verified_on_directory":  true
+                  }
+              ],
+    "quality_note":  "Directory links only; the page is not treated as the legal text of each country."
+}

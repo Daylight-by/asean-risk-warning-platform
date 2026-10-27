@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "协同监管后台",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "data-source": "/components/data-source/data-source"
+  }
+}

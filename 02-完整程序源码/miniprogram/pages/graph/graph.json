@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "跨境关联图谱",
+  "usingComponents": {
+    "data-source": "/components/data-source/data-source"
+  }
+}

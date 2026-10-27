@@ -1,0 +1,102 @@
+<view class="container">
+  <!-- 页面头部 -->
+  <view class="page-header">
+    <view class="page-title">📊 {{t.pages.dashboard.title}}</view>
+    <view class="page-desc">{{t.pages.dashboard.subtitle}}</view>
+  </view>
+
+  <!-- 加载中 -->
+  <view class="loading-more" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">{{t.common.loading}}</text>
+  </view>
+
+  <block wx:if="{{!loading}}">
+    <!-- 统计卡片 -->
+    <view class="stat-row">
+      <view class="stat-card">
+        <text class="stat-num">{{stats.enterpriseTotal}}</text>
+        <text class="stat-label">{{t.pages.dashboard.enterprises}}</text>
+      </view>
+      <view class="stat-card">
+        <text class="stat-num">{{stats.warningTotal}}</text>
+        <text class="stat-label">{{t.pages.dashboard.warnings}}</text>
+      </view>
+      <view class="stat-card">
+        <text class="stat-num">{{stats.policyTotal}}</text>
+        <text class="stat-label">{{t.pages.dashboard.policies}}</text>
+      </view>
+      <view class="stat-card">
+        <text class="stat-num">{{stats.countryCount}}</text>
+        <text class="stat-label">{{t.pages.dashboard.countries}}</text>
+      </view>
+    </view>
+
+    <!-- 东盟风险地图 -->
+    <view class="card map-card">
+      <view class="section-header">
+        <text class="section-title">🌏 {{t.pages.dashboard.map}}</text>
+        <text class="section-sub">{{t.pages.dashboard.mapSub}}</text>
+      </view>
+      <map class="risk-map" latitude="{{mapLat}}" longitude="{{mapLng}}" markers="{{markers}}" scale="4"></map>
+    </view>
+
+    <!-- 风险等级分布 -->
+    <view class="card chart-card">
+      <view class="section-header">
+        <text class="section-title">⚠️ {{t.pages.dashboard.distribution}}</text>
+      </view>
+      <view class="donut-wrap">
+        <canvas type="2d" id="donutCanvas" class="donut-canvas"></canvas>
+        <view class="donut-legend">
+          <view class="legend-item">
+            <view class="legend-dot" style="background:#EF4444"></view>
+            <text class="legend-text">{{t.common.high}} {{levelCounts.high}}</text>
+          </view>
+          <view class="legend-item">
+            <view class="legend-dot" style="background:#F59E0B"></view>
+            <text class="legend-text">{{t.common.medium}} {{levelCounts.medium}}</text>
+          </view>
+          <view class="legend-item">
+            <view class="legend-dot" style="background:#10B981"></view>
+            <text class="legend-text">{{t.common.low}} {{levelCounts.low}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 预警趋势 -->
+    <view class="card chart-card">
+      <view class="section-header">
+        <text class="section-title">📈 {{t.pages.dashboard.trend}}</text>
+      </view>
+      <view class="trend-wrap">
+        <canvas type="2d" id="trendCanvas" class="trend-canvas"></canvas>
+      </view>
+    </view>
+
+    <!-- 最新预警 -->
+    <view class="card" wx:if="{{recentWarnings.length > 0}}">
+      <view class="section-header">
+        <text class="section-title">🚨 {{t.pages.dashboard.latest}}</text>
+      </view>
+      <view class="recent-item" wx:for="{{recentWarnings}}" wx:key="enterpriseName">
+        <view class="recent-level recent-level-{{item.level}}">{{item.levelText}}</view>
+        <view class="recent-body">
+          <view class="recent-name">{{item.enterpriseName}}</view>
+          <view class="recent-content">{{item.content}}</view>
+          <view class="recent-time">{{item.createTime}}</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 数据来源声明 -->
+    <view class="data-source">
+      <view class="source-title">{{t.pages.dashboard.sourceTitle}}</view>
+      <view class="source-content">{{t.pages.dashboard.sourceText}}</view>
+      <view class="source-notice">{{t.pages.dashboard.sourceNotice}}</view>
+    </view>
+
+    <data-source />
+  </block>
+</view>

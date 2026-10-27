@@ -1,0 +1,123 @@
+<view class="search-container">
+  <!-- 天眼通头部：蓝渐变 + 搜索胶囊 -->
+  <view class="search-bar">
+    <view class="search-input-wrap">
+      <text class="search-icon-text">🔍</text>
+      <input
+        class="search-input"
+        placeholder="{{i18n.search.placeholder}}"
+        value="{{keyword}}"
+        focus="{{autoFocus}}"
+        bindinput="onInput"
+        bindconfirm="onSearch"
+        confirm-type="search"
+      />
+      <view class="search-clear" wx:if="{{keyword}}" bindtap="onClear">
+        <text>✕</text>
+      </view>
+    </view>
+    <view class="search-btn" bindtap="onSearch">{{i18n.search.button}}</view>
+  </view>
+
+  <view class="search-body">
+    <!-- 搜索联想列表 -->
+    <view class="suggest-list" wx:if="{{suggestList.length > 0 && keyword.length >= 2}}">
+      <view
+        class="suggest-item tappable-row"
+        wx:for="{{suggestList}}"
+        wx:key="id"
+        bindtap="onSelectSuggest"
+        data-id="{{item.id}}"
+        data-name="{{item.name}}"
+      >
+        <view class="suggest-info">
+          <text class="suggest-name">{{item.name}}</text>
+          <text class="suggest-country">{{item.country}}</text>
+        </view>
+        <view class="suggest-arrow">›</view>
+      </view>
+    </view>
+
+    <!-- 无搜索时的默认展示：搜索历史 -->
+    <view wx:if="{{!showResults && !hasSearched}}">
+      <view class="section" wx:if="{{searchHistory.length > 0}}">
+        <view class="section-header">
+          <text class="section-title">{{i18n.search.history}}</text>
+          <text class="section-action" bindtap="onClearHistory">{{i18n.search.clear}}</text>
+        </view>
+        <view class="history-tags">
+          <view
+            class="history-tag"
+            wx:for="{{searchHistory}}"
+            wx:key="*this"
+            bindtap="onTapHistory"
+            data-keyword="{{item}}"
+          >
+            {{item}}
+          </view>
+        </view>
+      </view>
+
+      <view class="empty-tip" wx:if="{{searchHistory.length === 0}}">
+        <text class="empty-tip-icon">🔍</text>
+        <text class="empty-tip-text">{{i18n.search.empty}}</text>
+      </view>
+    </view>
+
+    <!-- 搜索结果列表 -->
+    <view class="result-list" wx:if="{{showResults}}">
+      <view class="result-header" wx:if="{{resultList.length > 0}}">
+        <text class="result-count">"{{lastKeyword}}" {{i18n.search.count}} <text class="count-number">{{resultList.length}}</text> {{i18n.search.results}}</text>
+      </view>
+
+      <view
+        class="result-item card slide-in tappable-card"
+        wx:for="{{resultList}}"
+        wx:key="id"
+        bindtap="onSelectResult"
+        data-id="{{item.id}}"
+        style="animation-delay: {{index * 0.05}}s"
+      >
+        <view class="result-header-row">
+          <view class="result-name">{{item.name}}</view>
+          <view class="result-risk-badge {{item.riskScore >= 70 ? 'risk-bg-high' : item.riskScore >= 40 ? 'risk-bg-medium' : 'risk-bg-low'}}" wx:if="{{item.riskScore != null}}">
+            {{item.riskScore >= 70 ? 'H' : item.riskScore >= 40 ? 'M' : 'L'}}
+          </view>
+        </view>
+        <view class="result-meta">
+          <view class="meta-item">
+            <text class="meta-icon">📍</text>
+            <text class="result-country">{{item.country || i18n.search.unknown}}</text>
+          </view>
+          <view class="meta-item" wx:if="{{item.industry}}">
+            <text class="meta-icon">🏢</text>
+            <text class="result-industry">{{item.industry}}</text>
+          </view>
+        </view>
+        <view class="result-score" wx:if="{{item.riskScore != null}}">
+          <view class="score-bar">
+            <view class="score-bar-fill {{item.riskScore >= 70 ? 'bar-high' : item.riskScore >= 40 ? 'bar-medium' : 'bar-low'}}" style="width: {{item.riskScore}}%"></view>
+          </view>
+          <text class="score-label">Risk score: </text>
+          <text class="score-value {{item.riskScore >= 70 ? 'risk-high' : item.riskScore >= 40 ? 'risk-medium' : 'risk-low'}}">
+            {{item.riskScore}}
+          </text>
+          <text class="score-level-tag {{item.riskScore >= 70 ? 'tag-danger' : item.riskScore >= 40 ? 'tag-warning' : 'tag-success'}}">
+            {{item.riskScore >= 70 ? i18n.search.high : item.riskScore >= 40 ? i18n.search.medium : i18n.search.low}}
+          </text>
+        </view>
+        <view class="result-footer">
+          <text class="result-arrow">{{i18n.search.detail}}</text>
+          <text class="arrow-icon">›</text>
+        </view>
+      </view>
+
+      <!-- 无结果 -->
+      <view class="empty-state" wx:if="{{resultList.length === 0 && hasSearched}}">
+        <text class="icon">🔍</text>
+        <text class="text">{{i18n.search.noResult}}</text>
+        <text class="text-sub">{{i18n.search.noResultSub}}</text>
+      </view>
+    </view>
+  </view>
+</view>

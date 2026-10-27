@@ -1,0 +1,246 @@
+<view class="chat-page">
+  <!-- 顶部栏（深靛蓝渐变 + 几何装饰，与全局头部风格统一） -->
+  <view class="chat-head">
+    <view class="chat-head-deco"></view>
+    <view class="chat-head-info">
+      <view class="chat-avatar">🤖</view>
+      <view class="chat-head-text">
+        <view class="chat-title-row">
+          <text class="chat-title">{{t.pages.ai.title}}</text>
+          <view class="chat-status">
+            <view class="chat-status-dot"></view>{{t.pages.ai.online}}
+          </view>
+        </view>
+        <text class="chat-sub">{{t.pages.ai.subtitle}}</text>
+      </view>
+    </view>
+    <view wx:if="{{messages.length}}" class="chat-clear" bindtap="onClearHistory">{{t.pages.ai.clear}}</view>
+  </view>
+
+  <!-- 发送中顶部横幅 -->
+  <view wx:if="{{sending}}" class="chat-banner">
+    <view class="banner-dot"></view>
+    <text class="banner-text">{{t.pages.ai.thinking}}</text>
+  </view>
+
+  <!-- 消息区（可滚动） -->
+  <scroll-view
+    class="chat-scroll"
+    scroll-y
+    scroll-with-animation
+    scroll-top="{{scrollTop}}"
+  >
+    <!-- 空状态 / 建议 -->
+    <view wx:if="{{messages.length === 0}}" class="chat-empty">
+      <view class="chat-empty-avatar">🤖</view>
+      <view class="chat-empty-tip">
+        <text>{{t.pages.ai.greeting}}</text>
+        <text>{{t.pages.ai.help1}}</text>
+        <text>{{t.pages.ai.help2}}</text>
+      </view>
+      <view class="chat-suggest-label">{{t.pages.ai.suggestLabel}}</view>
+      <view class="chat-suggests">
+        <view
+          class="chat-suggest"
+          wx:for="{{suggestions}}"
+          wx:key="index"
+          data-text="{{item}}"
+          bindtap="onUseSuggestion"
+        >
+          <text class="suggest-icon">💡</text>
+          <text class="suggest-text">{{item}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 消息气泡 -->
+    <view
+      wx:for="{{messages}}"
+      wx:key="id"
+      id="msg-{{item.id}}"
+      class="msg-row {{item.role === 'user' ? 'msg-user' : 'msg-ai'}}"
+    >
+      <view class="msg-avatar {{item.role === 'user' ? 'avatar-user' : 'avatar-ai'}}">{{item.role === 'user' ? '🙂' : '🤖'}}</view>
+      <view class="msg-bubble {{item.role === 'user' ? 'bubble-user' : 'bubble-ai'}}">
+        <!-- 输入中三点动画 -->
+        <view wx:if="{{item.typing}}" class="typing">
+          <text></text><text></text><text></text>
+        </view>
+        <!-- 正文 -->
+        <text wx:elif="{{item.content}}" class="msg-text" user-select="{{true}}" space="nbsp" decode="{{true}}">{{item.content}}</text>
+
+        <!-- 执行中状态 -->
+        <view wx:if="{{item.loading}}" class="exec-loading">
+          <view class="exec-spinner"></view>
+          <text class="exec-text">{{t.pages.ai.executing}}</text>
+        </view>
+
+        <!-- 确认卡（写操作二次确认） -->
+        <view wx:if="{{item.confirm}}" class="card confirm-card">
+          <view class="card-head">
+            <text class="card-icon">🔒</text>
+            <text class="card-title">{{t.pages.ai.confirmTitle}}</text>
+          </view>
+          <view class="card-body">
+            <text class="confirm-action">{{t.pages.ai.executePrefix}}{{item.confirm.actionName}}</text>
+            <text class="confirm-target">{{t.pages.ai.enterprisePrefix}}{{item.confirm.name}}</text>
+          </view>
+          <view class="card-actions">
+            <view class="btn btn-cancel" catchtap="onCancelConfirm" data-id="{{item.id}}">{{t.common.cancel}}</view>
+            <view class="btn btn-ok" catchtap="onConfirmAction" data-id="{{item.id}}">{{t.pages.ai.confirmExecute}}</view>
+          </view>
+        </view>
+
+        <!-- 结果卡（按 kind 渲染） -->
+        <block wx:elif="{{item.card}}">
+          <!-- 企业列表 -->
+          <view wx:if="{{item.card.kind === 'enterprise'}}" class="card result-card">
+            <view class="card-title">{{t.pages.ai.relatedEnterprise}}</view>
+            <view
+              class="card-row"
+              wx:for="{{item.card.items}}"
+              wx:for-item="ent"
+              wx:key="id"
+              data-url="{{ent.navUrl}}"
+              bindtap="onTapNavigate"
+            >
+              <text class="row-name">{{ent.name}}</text>
+              <text class="row-badge {{ent.riskScore >= 80 ? 'ok' : (ent.riskScore >= 60 ? 'warn' : 'bad')}}">{{ent.riskScore != null ? ent.riskScore + t.common.score : t.common.view}}</text>
+            </view>
+          </view>
+
+          <!-- 预警列表 -->
+          <view wx:elif="{{item.card.kind === 'warning'}}" class="card result-card">
+            <view class="card-title">{{t.pages.ai.warning}}</view>
+            <view
+              class="card-row"
+              wx:for="{{item.card.items}}"
+              wx:for-item="w"
+              wx:key="id"
+              data-url="{{w.navUrl}}"
+              bindtap="onTapNavigate"
+            >
+              <text class="row-name">{{w.name}}</text>
+              <text class="row-badge {{w.levelKey === 'high' ? 'bad' : (w.levelKey === 'medium' ? 'warn' : 'ok')}}">{{w.level}}</text>
+            </view>
+          </view>
+
+          <!-- 政策列表 -->
+          <view wx:elif="{{item.card.kind === 'policy'}}" class="card result-card">
+            <view class="card-title">{{t.pages.ai.policy}}</view>
+            <view
+              class="card-row"
+              wx:for="{{item.card.items}}"
+              wx:for-item="p"
+              wx:key="id"
+              data-url="{{p.navUrl}}"
+              bindtap="onTapNavigate"
+            >
+              <text class="row-tag">[{{p.country}}]</text>
+              <text class="row-name">{{p.title}}</text>
+            </view>
+          </view>
+
+          <!-- 风控评分 -->
+          <view wx:elif="{{item.card.kind === 'score'}}" class="card result-card score-card" data-url="{{item.card.navUrl}}" bindtap="onTapNavigate">
+            <view class="card-title">{{item.card.name}} · {{t.pages.ai.score}}</view>
+            <view class="score-main">
+              <text class="score-num">{{item.card.data.riskScore}}</text>
+              <text class="score-level {{item.card.data.riskLevelKey === 'high' ? 'bad' : (item.card.data.riskLevelKey === 'medium' ? 'warn' : 'ok')}}">{{item.card.data.riskLevelLabel}}</text>
+            </view>
+            <view class="score-subs">
+              <text class="score-sub">{{t.pages.ai.base}} {{item.card.data.basicScore}}</text>
+              <text class="score-sub">{{t.pages.ai.compliance}} {{item.card.data.complianceScore}}</text>
+              <text class="score-sub">{{t.pages.ai.customs}} {{item.card.data.customsScore}}</text>
+              <text class="score-sub">{{t.pages.ai.trade}} {{item.card.data.tradeScore}}</text>
+            </view>
+            <text class="card-more">{{t.pages.ai.viewReport}}</text>
+          </view>
+
+          <!-- 口岸画像 -->
+          <view wx:elif="{{item.card.kind === 'port'}}" class="card result-card" data-url="{{item.card.navUrl}}" bindtap="onTapNavigate">
+            <view class="card-title">{{item.card.name}} · {{t.pages.ai.port}}</view>
+            <view class="score-subs">
+              <text class="score-sub">{{t.pages.ai.primaryPort}} {{item.card.data.primaryPort}}</text>
+              <text class="score-sub">{{t.pages.ai.settlementScore}} {{item.card.data.settlementScore}}</text>
+              <text class="score-sub">{{item.card.data.settlementLevel}}</text>
+            </view>
+            <text class="card-more">{{t.pages.ai.viewPort}}</text>
+          </view>
+
+          <!-- 关联图谱 -->
+          <view wx:elif="{{item.card.kind === 'graph'}}" class="card result-card" data-url="{{item.card.navUrl}}" bindtap="onTapNavigate">
+            <view class="card-title">{{item.card.name}} · {{t.pages.ai.graph}}</view>
+            <text class="card-desc">{{item.card.data.summary}}</text>
+            <text class="card-more">{{t.pages.ai.viewGraph}}</text>
+          </view>
+
+          <!-- 订阅结果 -->
+          <view wx:elif="{{item.card.kind === 'subscribe'}}" class="card result-card ok-card">
+            <view class="card-head">
+              <text class="card-icon">✅</text>
+              <text class="card-title">{{t.pages.ai.subscribeSuccess}}</text>
+            </view>
+            <text class="card-desc">{{t.pages.ai.subscribePrefix}}{{item.card.name}}{{t.pages.ai.subscribeSuffix}}</text>
+          </view>
+
+          <!-- 合规体检结果 -->
+          <view wx:elif="{{item.card.kind === 'compliance'}}" class="card result-card" data-url="{{item.card.navUrl}}" bindtap="onTapNavigate">
+            <view class="card-title">{{item.card.name}} · {{t.pages.ai.complianceCheck}}</view>
+            <view class="score-subs">
+              <text class="score-sub">{{t.pages.ai.complianceScore}} {{item.card.data.score}}</text>
+              <text class="score-sub">{{item.card.data.level}}</text>
+            </view>
+            <text class="card-desc">{{item.card.data.suggestion}}</text>
+            <text class="card-more">{{t.pages.ai.viewCompliance}}</text>
+          </view>
+
+          <!-- 信用报告结果 -->
+          <view wx:elif="{{item.card.kind === 'report'}}" class="card result-card ok-card" data-url="{{item.card.navUrl}}" bindtap="onTapNavigate">
+            <view class="card-head">
+              <text class="card-icon">📄</text>
+              <text class="card-title">{{t.pages.ai.reportGenerated}}</text>
+            </view>
+            <text class="card-desc">{{t.pages.ai.reportPrefix}}{{item.card.name}}{{t.pages.ai.reportSuffix}}</text>
+            <text class="card-more">{{t.pages.ai.viewReport}}</text>
+          </view>
+
+          <!-- 错误卡 -->
+          <view wx:elif="{{item.card.kind === 'error'}}" class="card result-card err-card">
+            <text class="card-desc err-text">{{item.card.message}}</text>
+            <view class="card-actions">
+              <view class="btn btn-ok" catchtap="onRetry" data-id="{{item.id}}">{{t.common.retry}}</view>
+            </view>
+          </view>
+        </block>
+
+        <!-- 错误 + 重试（纯对话失败） -->
+        <view wx:if="{{item.error}}" class="msg-err">
+          <text class="msg-err-text">{{item.error}}</text>
+          <text class="msg-retry" catchtap="onRetry" data-id="{{item.id}}">{{t.common.retry}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 底部免责声明 -->
+    <view wx:if="{{messages.length}}" class="chat-disclaimer">{{t.pages.ai.disclaimer}}</view>
+  </scroll-view>
+
+  <!-- 底部固定输入区 -->
+  <view class="chat-input-bar">
+    <textarea
+      class="chat-input"
+      value="{{inputValue}}"
+      placeholder="{{t.pages.ai.placeholder}}"
+      placeholder-class="chat-input-ph"
+      confirm-type="send"
+      auto-height
+      maxlength="500"
+      show-confirm-bar="{{false}}"
+      adjust-position="{{true}}"
+      bindinput="onInput"
+      bindconfirm="onSend"
+    ></textarea>
+    <view class="chat-send {{canSend ? 'active' : ''}}" bindtap="onSend">{{t.pages.ai.send}}</view>
+  </view>
+</view>

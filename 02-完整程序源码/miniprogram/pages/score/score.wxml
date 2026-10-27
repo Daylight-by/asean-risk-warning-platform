@@ -1,0 +1,128 @@
+<view class="container">
+  <!-- 企业信息头部 - 优化 -->
+  <view class="enterprise-header">
+    <view class="enterprise-bg"></view>
+    <view class="enterprise-content">
+      <view class="enterprise-icon">🏢</view>
+      <view class="enterprise-info">
+        <view class="enterprise-name">{{enterpriseName}}</view>
+        <view class="enterprise-id">{{t.pages.score.id}}: {{enterpriseId}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 分国别差异化评分模型 -->
+  <view class="country-bar">
+    <text class="country-bar-label">🌏 {{t.pages.score.model}}</text>
+    <picker class="country-picker" mode="selector" range="{{countries}}" value="{{countryIndex}}" bindchange="onPickCountry">
+      <view class="country-picker-text">{{modelCountry}} ›</view>
+    </picker>
+    <text class="country-bar-note">{{t.pages.score.modelNote}}</text>
+  </view>
+
+  <!-- 风控评分仪表盘 - 优化 -->
+  <view class="score-section card">
+    <view class="section-header">
+      <text class="section-title">📊 {{t.pages.score.title}}</text>
+      <text class="section-subtitle">{{t.pages.score.subtitle}}</text>
+    </view>
+    <view class="gauge-container">
+      <canvas 
+        type="2d" 
+        id="gaugeCanvas" 
+        class="gauge-canvas"
+      ></canvas>
+      <view class="gauge-score">
+        <text class="score-number {{riskLevel === 'high' ? 'risk-high' : riskLevel === 'medium' ? 'risk-medium' : 'risk-low'}}">
+          {{riskScore}}
+        </text>
+        <text class="score-unit">{{t.common.score}}</text>
+      </view>
+    </view>
+    <view class="risk-level-badge {{riskLevel === 'high' ? 'risk-badge-high' : riskLevel === 'medium' ? 'risk-badge-medium' : 'risk-badge-low'}}">
+      <text class="badge-icon">{{riskLevel === 'high' ? '🔴' : riskLevel === 'medium' ? '🟡' : '🟢'}}</text>
+      <text class="badge-text">{{riskLevelText}}</text>
+    </view>
+    <view class="risk-desc">
+      <text class="desc-icon">💡</text>
+      <text>{{riskDescription}}</text>
+    </view>
+  </view>
+
+  <!-- 五维雷达图 - 优化 -->
+  <view class="radar-section card">
+    <view class="section-header">
+      <text class="section-title">📈 {{t.pages.score.analysis}}</text>
+      <text class="section-subtitle">{{t.pages.score.analysisSub}}</text>
+    </view>
+    <view class="radar-container">
+      <canvas 
+        type="2d" 
+        id="radarCanvas" 
+        class="radar-canvas"
+      ></canvas>
+    </view>
+    <view class="dimensions-grid">
+      <view class="dimension-card" wx:for="{{dimensions}}" wx:key="name">
+        <view class="dimension-header">
+          <view class="dimension-dot" style="background: {{item.color}}"></view>
+          <text class="dimension-name">{{item.name}}</text>
+        </view>
+        <view class="dimension-score">
+          <text class="score-value">{{item.value}}</text>
+          <text class="score-suffix">{{t.common.score}}</text>
+        </view>
+        <view class="dimension-bar">
+          <view class="dimension-fill" style="width: {{item.value}}%; background: {{item.color}}"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 风险标签 - 优化 -->
+  <view class="tags-section card" wx:if="{{riskTags.length > 0}}">
+    <view class="section-header">
+      <text class="section-title">🏷️ {{t.pages.score.tags}}</text>
+      <text class="section-subtitle">{{t.pages.score.tagsSub}}</text>
+    </view>
+    <view class="tags-grid">
+      <view 
+        class="risk-tag-item {{item.level === 'high' ? 'tag-high' : item.level === 'medium' ? 'tag-medium' : 'tag-low'}}" 
+        wx:for="{{riskTags}}" 
+        wx:key="name"
+      >
+        <text class="tag-icon">{{item.level === 'high' ? '⚠️' : item.level === 'medium' ? '⚡' : 'ℹ️'}}</text>
+        <text class="tag-name">{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 操作按钮 - 优化 -->
+  <view class="action-section">
+    <button class="action-btn btn-report" bindtap="onGenerateReport">
+      <text class="btn-icon">📄</text>
+      <text class="btn-text">{{t.pages.score.report}}</text>
+    </button>
+    <button class="action-btn btn-subscribe {{isSubscribed ? 'subscribed' : ''}}" bindtap="onSubscribeWarning">
+      <text class="btn-icon">{{isSubscribed ? '🔕' : '🔔'}}</text>
+      <text class="btn-text">{{isSubscribed ? t.pages.score.subscribed : t.pages.score.subscribe}}</text>
+    </button>
+  </view>
+
+  <!-- 数据来源声明 - 优化 -->
+  <view class="data-source">
+    <view class="source-header">
+      <text class="source-icon">📊</text>
+      <text class="source-title">{{t.common.source}}</text>
+    </view>
+    <view class="source-content">
+      {{t.pages.score.sourceText}}
+    </view>
+    <view class="source-footer">
+      <text class="update-freq">{{t.common.demo}}</text>
+      <text class="source-notice">{{t.pages.score.sourceText}}</text>
+    </view>
+  </view>
+
+  <data-source />
+</view>

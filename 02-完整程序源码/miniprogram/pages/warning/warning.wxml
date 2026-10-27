@@ -1,0 +1,103 @@
+<view class="container">
+  <!-- 页面头部（统一蓝色，与首页一致） -->
+  <view class="ty-page-head">
+    <view class="ty-page-title">🔔 {{t.pages.warning.title}}</view>
+    <view class="ty-page-sub">{{t.pages.warning.subtitle}}</view>
+  </view>
+
+  <!-- 下拉刷新提示 -->
+  <view class="pull-hint">
+    <text class="arrow">↓</text>
+    <text>{{t.pages.warning.refresh}}</text>
+  </view>
+
+  <!-- 跨境欺诈前置预警 -->
+  <view class="predict-card" wx:if="{{predictive}}">
+    <view class="predict-title">🔮 {{t.pages.warning.predictive}}<text class="predict-sub">{{t.pages.warning.predictiveSub}}</text></view>
+    <view class="predict-ent">{{t.pages.warning.target}}: {{predictive.enterpriseName}}</view>
+    <view class="predict-risk" wx:for="{{predictive.risks}}" wx:key="type">
+      <view class="pr-head">
+        <text class="pr-type">{{item.type}}</text>
+        <text class="pr-prob {{item.level}}">{{item.prob}}%</text>
+      </view>
+      <view class="pr-bar"><view class="pr-fill {{item.level}}" style="width: {{item.prob}}%"></view></view>
+      <view class="pr-desc">{{item.desc}}</view>
+    </view>
+  </view>
+
+  <!-- 统计卡片 -->
+  <view class="stats-row" wx:if="{{warningList.length > 0}}">
+    <view class="stat-card stat-high">
+      <text class="stat-num">{{highCount || 0}}</text>
+      <text class="stat-label">{{t.common.high}}</text>
+    </view>
+    <view class="stat-card stat-medium">
+      <text class="stat-num">{{mediumCount || 0}}</text>
+      <text class="stat-label">{{t.common.medium}}</text>
+    </view>
+    <view class="stat-card stat-low">
+      <text class="stat-num">{{lowCount || 0}}</text>
+      <text class="stat-label">{{t.common.low}}</text>
+    </view>
+  </view>
+
+  <view class="translation-switch" wx:if="{{language !== 'zh'}}" bindtap="onToggleOriginal">{{showOriginal ? 'Show translation' : 'View original'}} · AI translation demo</view>
+
+  <!-- 预警列表 -->
+  <view wx:if="{{warningList.length > 0}}">
+    <view 
+      class="warning-item card slide-in tappable-card" 
+      wx:for="{{warningList}}" 
+      wx:key="id"
+      bindtap="onViewDetail"
+      data-id="{{item.id}}"
+      data-enterprise-id="{{item.enterpriseId}}"
+      data-enterprise-name="{{item.enterpriseName}}"
+    >
+      <!-- 预警头部 -->
+      <view class="warning-header">
+        <view class="warning-level-badge warning-level-{{item.level}}">
+          <text class="level-icon">{{item.level === 'high' ? '🔴' : item.level === 'medium' ? '🟡' : '🟢'}}</text>
+          <text class="level-text">{{item.levelText}}</text>
+        </view>
+        <text class="warning-time">{{item.createTime}}</text>
+      </view>
+
+      <!-- 企业名称 -->
+      <view class="warning-enterprise">
+        <text class="enterprise-icon">🏢</text>
+        <text class="enterprise-name">{{item.enterpriseName}}</text>
+      </view>
+
+      <!-- 预警内容 -->
+      <view class="warning-content">{{showOriginal ? item.original.content : item.displayContent}}</view>
+      <view class="translation-meta" wx:if="{{item.translationMeta}}">{{item.translationMeta}}</view>
+
+      <!-- 预警底部 -->
+      <view class="warning-footer">
+        <view class="warning-action">
+          <text>{{t.common.detail}}</text>
+          <text class="action-arrow">›</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 - 优化 -->
+  <view class="empty-state" wx:if="{{warningList.length === 0 && !loading}}">
+    <text class="icon">🔔</text>
+    <text class="text">{{t.pages.warning.empty}}</text>
+    <text class="text-sub">{{t.pages.warning.emptySub}}</text>
+  </view>
+
+  <!-- 加载更多 - 优化 -->
+  <view class="loading-more" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">{{t.common.loading}}</text>
+  </view>
+  <view class="no-more" wx:if="{{!hasMore && warningList.length > 0 && !loading}}">
+    <text class="no-more-text">{{t.pages.warning.allLoaded}}</text>
+  </view>
+
+  <data-source />
+  </view>

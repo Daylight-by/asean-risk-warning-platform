@@ -1,0 +1,106 @@
+<view class="container">
+  <!-- 页面标题（统一蓝色头部） -->
+  <view class="ty-page-head">
+    <view class="ty-page-title">📋 {{t.pages.policy.title}}</view>
+    <view class="ty-page-sub">{{t.pages.policy.subtitle}}</view>
+  </view>
+
+  <!-- 搜索框 -->
+  <view class="search-box" wx:if="{{showSearch}}">
+    <view class="search-input-wrap tappable">
+      <text class="search-icon-text">🔍</text>
+      <input class="search-input" placeholder="{{t.pages.policy.placeholder}}" value="{{keyword}}" bindinput="onInput" confirm-type="search" bindconfirm="onSearch" />
+      <text class="search-clear" wx:if="{{keyword}}" bindtap="onClearKeyword">✕</text>
+    </view>
+  </view>
+
+  <!-- 下拉刷新提示 -->
+  <view class="pull-hint">
+    <text class="arrow">↓</text>
+    <text>{{t.pages.policy.refresh}}</text>
+  </view>
+
+  <!-- 国家筛选 - 优化 -->
+  <scroll-view class="country-filter" scroll-x="true" enhanced="true" show-scrollbar="{{false}}">
+    <view 
+      class="country-tag {{selectedCountry === '' ? 'active' : ''}}" 
+      bindtap="onFilterCountry"
+      data-country=""
+    >{{t.common.all}}</view>
+    <view 
+      class="country-tag {{selectedCountry === item.value ? 'active' : ''}}" 
+      wx:for="{{countryOptions}}" 
+      wx:key="value" 
+      bindtap="onFilterCountry"
+      data-country="{{item.value}}"
+    >{{item.label}}</view>
+  </scroll-view>
+
+  <view class="translation-switch" wx:if="{{language !== 'zh'}}" bindtap="onToggleOriginal">{{showOriginal ? 'Show translation' : 'View original'}} · AI translation demo</view>
+
+  <!-- 政策列表 - 优化 -->
+  <view wx:if="{{policyList.length > 0}}">
+    <view 
+      class="policy-item card slide-in tappable-card" 
+      wx:for="{{policyList}}" 
+      wx:key="id"
+      bindtap="onViewPolicy"
+      data-id="{{item.id}}"
+    >
+      <!-- 顶部：国家标签 + 日期 -->
+      <view class="policy-header">
+        <view class="policy-country-badge">
+          <text class="country-flag">{{item.country === '泰国' ? '🇹🇭' : item.country === '越南' ? '🇻🇳' : item.country === '马来西亚' ? '🇲🇾' : item.country === '印度尼西亚' ? '🇮🇩' : item.country === '菲律宾' ? '🇵🇭' : item.country === '新加坡' ? '🇸🇬' : '📍'}}</text>
+          <text class="country-name">{{item.countryDisplay || item.country}}</text>
+        </view>
+        <text class="policy-date">{{item.publishDate}}</text>
+      </view>
+
+      <!-- 标题 -->
+      <view class="policy-title">{{showOriginal ? item.original.title : item.displayTitle}}</view>
+
+      <!-- 摘要 -->
+      <view class="policy-summary">{{showOriginal ? item.original.summary : item.displaySummary}}</view>
+      <view class="translation-meta" wx:if="{{item.translationMeta}}">{{item.translationMeta}}</view>
+
+      <!-- 标签 -->
+      <view class="policy-tags" wx:if="{{item.tags && item.tags.length > 0}}">
+        <view class="policy-tag" wx:for="{{item.tags}}" wx:key="*this" wx:for-item="tag">
+          #{{tag}}
+        </view>
+      </view>
+
+      <!-- 来源 -->
+      <view class="policy-footer">
+        <view class="policy-source">
+          <text class="source-icon">📌</text>
+          <text>{{item.source || t.pages.policy.official}}</text>
+        </view>
+        <view class="policy-action">
+          <text>{{t.common.detail}}</text>
+          <text class="action-arrow">›</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 加载中 - 优化 -->
+  <view class="loading-more" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">{{t.common.loading}}</text>
+  </view>
+
+  <!-- 空状态 - 优化 -->
+  <view class="empty-state" wx:if="{{policyList.length === 0 && !loading}}">
+    <text class="icon">📋</text>
+    <text class="text">{{t.pages.policy.empty}}</text>
+    <text class="text-sub">{{t.pages.policy.emptySub}}</text>
+  </view>
+
+  <!-- 没有更多 -->
+  <view class="no-more" wx:if="{{!hasMore && policyList.length > 0 && !loading}}">
+    <text class="no-more-text">{{t.pages.policy.allLoaded}}</text>
+  </view>
+
+  <data-source />
+  </view>

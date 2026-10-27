@@ -1,0 +1,57 @@
+<view class="page">
+  <view class="page-header">
+    <text class="page-title">{{t.pages.terminology.title}}</text>
+    <text class="page-subtitle">{{t.pages.terminology.subtitle}}</text>
+  </view>
+  
+  <!-- 分类筛选 -->
+  <scroll-view class="category-scroll" scroll-x>
+    <view class="category-list">
+      <view class="category-item {{activeCategory === '' ? 'active' : ''}}" bindtap="onCategoryChange" data-cat="">{{t.common.all}}</view>
+      <view class="category-item {{activeCategory === '报关' ? 'active' : ''}}" bindtap="onCategoryChange" data-cat="报关">{{t.pages.terminology.cats[1]}}</view>
+      <view class="category-item {{activeCategory === '税务' ? 'active' : ''}}" bindtap="onCategoryChange" data-cat="税务">{{t.pages.terminology.cats[2]}}</view>
+      <view class="category-item {{activeCategory === '物流' ? 'active' : ''}}" bindtap="onCategoryChange" data-cat="物流">{{t.pages.terminology.cats[3]}}</view>
+      <view class="category-item {{activeCategory === '支付' ? 'active' : ''}}" bindtap="onCategoryChange" data-cat="支付">{{t.pages.terminology.cats[4]}}</view>
+      <view class="category-item {{activeCategory === '法律' ? 'active' : ''}}" bindtap="onCategoryChange" data-cat="法律">{{t.pages.terminology.cats[5]}}</view>
+    </view>
+  </scroll-view>
+  
+  <!-- 搜索框 -->
+  <view class="search-wrap">
+    <input class="search-input" placeholder="{{t.pages.terminology.placeholder}}" value="{{keyword}}" bindinput="onInput" bindconfirm="onSearch" />
+  </view>
+  
+  <!-- 术语列表 -->
+  <view class="term-list">
+    <view class="term-card" wx:for="{{termList}}" wx:key="id">
+      <view class="term-header">
+        <text class="term-cn">{{item.termCn}}</text>
+        <view class="term-category">{{item.category}}</view>
+      </view>
+      <view class="term-row" wx:if="{{item.termEn}}">
+        <text class="term-label">EN</text>
+        <text class="term-value">{{item.termEn}}</text>
+      </view>
+      <view class="term-row" wx:if="{{item.termVn}}">
+        <text class="term-label">VN</text>
+        <text class="term-value">{{item.termVn}}</text>
+      </view>
+      <view class="term-row" wx:if="{{item.termTh}}">
+        <text class="term-label">TH</text>
+        <text class="term-value">{{item.termTh}}</text>
+      </view>
+      <view class="term-desc" wx:if="{{item.description}}">{{item.description}}</view>
+      <view class="term-footer">
+        <text class="term-hs" wx:if="{{item.hsCode}}">HS: {{item.hsCode}}</text>
+        <text class="term-source">{{item.source}}</text>
+      </view>
+    </view>
+  </view>
+  
+  <view class="empty-state" wx:if="{{termList.length === 0 && !loading}}">
+    <text class="empty-icon">📚</text>
+    <text class="empty-text">{{t.pages.terminology.empty}}</text>
+  </view>
+  
+  <data-source />
+</view>

@@ -1,0 +1,10 @@
+[
+  {"creditCode":"91450000MA5KX0011A","enterpriseName":"广西南宁越海贸易有限公司","portName":"凭祥口岸","declarationType":"出口","declarationDate":"2025-11-12","goodsCategory":"农产品-热带水果","isViolation":0,"inspectionResult":"查验通过","clearanceDuration":18,"dataSource":"广西口岸办公开统计"},
+  {"creditCode":"91450000MA5KX0011A","enterpriseName":"广西南宁越海贸易有限公司","portName":"凭祥口岸","declarationType":"出口","declarationDate":"2025-12-03","goodsCategory":"农产品-木薯淀粉","isViolation":0,"inspectionResult":"查验通过","clearanceDuration":21,"dataSource":"广西口岸办公开统计"},
+  {"creditCode":"91450600MA5KY0022B","enterpriseName":"东兴边贸通供应链有限公司","portName":"东兴口岸","declarationType":"进口","declarationDate":"2025-11-20","goodsCategory":"水产品-冻虾","isViolation":0,"inspectionResult":"查验通过","clearanceDuration":26,"dataSource":"广西口岸办公开统计"},
+  {"creditCode":"91450800MA5KZ0033C","enterpriseName":"钦州港联运国际物流有限公司","portName":"钦州港","declarationType":"出口","declarationDate":"2025-12-08","goodsCategory":"机电-小家电","isViolation":0,"inspectionResult":"查验通过","clearanceDuration":32,"dataSource":"广西口岸办公开统计"},
+  {"creditCode":"91450600MA5KY0044D","enterpriseName":"防城港东盟资源贸易行","portName":"东兴口岸","declarationType":"进口","declarationDate":"2025-11-28","goodsCategory":"矿产品-钛矿砂","isViolation":1,"inspectionResult":"查验异常-低报货值","clearanceDuration":48,"dataSource":"广西口岸办公开统计"},
+  {"creditCode":"91451000MA5KL0055E","enterpriseName":"百色靖西跨境农业合作社","portName":"龙邦口岸","declarationType":"出口","declarationDate":"2025-12-15","goodsCategory":"农产品-鲜切花","isViolation":0,"inspectionResult":"查验通过","clearanceDuration":15,"dataSource":"广西口岸办公开统计"},
+  {"creditCode":"91450000MA5KX0066F","enterpriseName":"广西崇左糖业进出口公司","portName":"凭祥口岸","declarationType":"出口","declarationDate":"2025-11-30","goodsCategory":"农产品-蔗糖","isViolation":0,"inspectionResult":"查验通过","clearanceDuration":19,"dataSource":"广西口岸办公开统计"},
+  {"creditCode":"91450800MA5KZ0077G","enterpriseName":"钦州港海产品工贸有限公司","portName":"钦州港","declarationType":"进口","declarationDate":"2025-12-01","goodsCategory":"水产品-冻鱼","isViolation":0,"inspectionResult":"查验通过","clearanceDuration":29,"dataSource":"广西口岸办公开统计"}
+]

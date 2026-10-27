@@ -1,0 +1,94 @@
+﻿{
+    "crawl_id":  "official-asean-crawl-20260809",
+    "retrieved_at_utc":  "2026-08-09 13:58:39",
+    "source_count":  7,
+    "sources":  [
+                    {
+                        "source_name":  "ASEANstats Data Portal",
+                        "source_url":  "https://data.aseanstats.org/api/indicator/ASE.TRP.WTR.C.215",
+                        "dataset_code":  "aseanstats_international_sea_cargo_latest",
+                        "indicator_code":  "ASE.TRP.WTR.C.215",
+                        "raw_path":  "E:\\bisai\\data\\aseanstats_international_sea_cargo_latest-20260809.json",
+                        "raw_sha256":  "DFA42880B5E984BFCCFD2EE42CD4608FB670E9BDD5220189CF508A48F42C63BD",
+                        "raw_record_count":  180,
+                        "latest_country_count":  9,
+                        "latest_periods":  "ID:2023, BN:2025, KH:2024, MM:2025, MY:2024, PH:2025, SG:2023, TH:2024, VN:2020",
+                        "retrieved_at_utc":  "2026-08-09 13:58:39",
+                        "quality_note":  "Latest available year is retained per country; missing countries are not imputed."
+                    },
+                    {
+                        "source_name":  "ASEANstats Data Portal",
+                        "source_url":  "https://data.aseanstats.org/api/indicator/ASE.TRP.WTR.C.217",
+                        "dataset_code":  "aseanstats_international_sea_container_latest",
+                        "indicator_code":  "ASE.TRP.WTR.C.217",
+                        "raw_path":  "E:\\bisai\\data\\aseanstats_international_sea_container_latest-20260809.json",
+                        "raw_sha256":  "4C93A0292CB5F35ED8D1C5971BF5950D71E33AD3A430731BFB3656C1DBDA155A",
+                        "raw_record_count":  156,
+                        "latest_country_count":  9,
+                        "latest_periods":  "BN:2025, KH:2024, MM:2025, MY:2024, PH:2025, SG:2023, TH:2024, VN:2012, ID:2022",
+                        "retrieved_at_utc":  "2026-08-09 13:58:39",
+                        "quality_note":  "Latest available year is retained per country; missing countries are not imputed."
+                    },
+                    {
+                        "source_name":  "ASEANstats Data Portal",
+                        "source_url":  "https://data.aseanstats.org/api/indicator/ASE.TRP.AIR.C.310",
+                        "dataset_code":  "aseanstats_international_air_cargo_latest",
+                        "indicator_code":  "ASE.TRP.AIR.C.310",
+                        "raw_path":  "E:\\bisai\\data\\aseanstats_international_air_cargo_latest-20260809.json",
+                        "raw_sha256":  "D4A5B1057298AC73D429A87438B1DF0F6EA955229AF4EECEEF4207C1C6856FAB",
+                        "raw_record_count":  206,
+                        "latest_country_count":  10,
+                        "latest_periods":  "BN:2025, KH:2023, LA:2025, MM:2025, MY:2025, PH:2025, SG:2023, TH:2025, VN:2018, ID:2025",
+                        "retrieved_at_utc":  "2026-08-09 13:58:39",
+                        "quality_note":  "Latest available year is retained per country; missing countries are not imputed."
+                    },
+                    {
+                        "source_name":  "UN Comtrade Preview API",
+                        "source_url":  "https://comtradeapi.un.org/public/v1/preview/C/A/HS?period=2024\u0026reporterCode=156\u0026flowCode=X\u0026partnerCode=096,116,360,418,458,104,608,702,764,704,626\u0026cmdCode=TOTAL\u0026maxRecords=100",
+                        "dataset_code":  "uncomtrade_china_asean_exports_2024",
+                        "raw_path":  "E:\\bisai\\data\\comtrade-china-asean-2024-preview.json",
+                        "raw_sha256":  "2E0C73F73AEB823E668AB7A23E3603BFF8B22C13F95043547F9A469F8B48860B",
+                        "normalized_path":  "E:\\bisai\\data\\comtrade-china-asean-2024-preview-normalized.json",
+                        "normalized_sha256":  "D8D1BD72DB7DE1476A1F084BC1351F68B68C44590048BE38D57E139278F809D0",
+                        "raw_record_count":  11,
+                        "retrieved_at_utc":  "2026-08-09 13:58:39",
+                        "quality_note":  "China reporter, export flow, HS TOTAL; partner coverage follows the official ASEAN partner list in the request; values remain official API response values."
+                    },
+                    {
+                        "source_name":  "ASEAN Trade Repository official NTR directory",
+                        "source_url":  "https://atr.asean.org/read/national-trade-repositories-asean-member-countries/60",
+                        "dataset_code":  "atr_ntr_official_directory_20260809",
+                        "raw_path":  "E:\\bisai\\data\\atr-ntr-official-directory-20260809.json",
+                        "raw_sha256":  "0C59050638B587ECF366FA0B45A29A570DE196003F84F586616F025E0AD9571A",
+                        "raw_record_count":  10,
+                        "retrieved_at_utc":  "2026-08-09 13:58:39",
+                        "quality_note":  "Official navigation records only; each link remains a separate national source for later policy verification."
+                    },
+                    {
+                        "source_name":  "骞胯タ鍙ｅ哺瀹樻柟鍏紑缁熻",
+                        "source_url":  "https://fgw.gxzf.gov.cn/xwzx/xwfb/t25943100.shtml; https://wsb.gxzf.gov.cn/xwyw_48149/dfws_48154/t19692909.shtml",
+                        "dataset_code":  "gx_port_official_2024",
+                        "raw_path":  "E:\\bisai\\data\\guangxi-port-official-pages-20260809.json",
+                        "raw_sha256":  "3BA0EA2591886A03443C55F9786072BBA7F9E0732DB3B3C826939F4A554C5B75",
+                        "raw_record_count":  5,
+                        "retrieved_at_utc":  "2026-08-09 13:58:39",
+                        "quality_note":  "Two official government pages; regional aggregate only, not enterprise-level customs or settlement data."
+                    },
+                    {
+                        "source_name":  "ASEAN Trade Repository country-topic directory",
+                        "source_url":  "https://atr.asean.org/read/national-trade-and-customs-laws-and-rules/45; https://atr.asean.org/read/procedures-and-documentary-requirements/46",
+                        "dataset_code":  "atr_policy_directory_10_countries_2_topics_20260809",
+                        "raw_path":  "E:\\bisai\\data\\atr-policy-directory-10-countries-2-topics-20260809.json",
+                        "raw_sha256":  "63DF8ACC34BEF5AD26257F4D1E1A55A908DBF7933CE8720D7BF05C497E738740",
+                        "raw_record_count":  20,
+                        "verified_ntr_link_count":  14,
+                        "retrieved_at_utc":  "2026-08-09 13:58:39",
+                        "quality_note":  "Directory records only; full policy text remains on the linked national repository."
+                    }
+                ],
+    "data_quality":  {
+                         "duplicate_check":  "latest-per-country import rows are unique by dataset_code + country_code; raw responses are preserved.",
+                         "missingness":  "No numeric imputation. Missing country/period records remain missing and are documented.",
+                         "timeliness":  "ASEANstats API metadata page reports its latest update; raw response retrieval time is preserved here."
+                     }
+}

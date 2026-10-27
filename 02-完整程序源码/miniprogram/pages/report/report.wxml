@@ -1,0 +1,203 @@
+<view class="container">
+  <!-- 报告头部 - 优化 -->
+  <view class="report-header">
+    <view class="report-bg"></view>
+    <view class="report-content">
+      <view class="report-icon">📄</view>
+      <view class="report-info">
+        <view class="report-title">{{t.pages.report.title}}</view>
+        <view class="report-enterprise">{{enterpriseName}}</view>
+        <view class="report-meta">
+          <text class="meta-item">{{t.pages.report.reportNo}}{{reportInfo.reportNo || '--'}}</text>
+          <text class="meta-item">{{t.pages.report.generateTime}}{{reportInfo.generateTime || '--'}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 搜索界面：无企业ID时显示 -->
+  <view wx:if="{{showSearch && !loading}}">
+    <view class="search-section card">
+      <view class="search-header">
+        <text class="search-title">{{t.pages.report.searchTitle}}</text>
+        <text class="search-desc">{{t.pages.report.searchDesc}}</text>
+      </view>
+      <view class="search-box">
+        <input class="search-input" placeholder="{{t.pages.report.placeholder}}" value="{{searchKeyword}}" bindinput="onSearchInput" bindconfirm="onSearch" />
+        <view wx:if="{{searchKeyword}}" class="search-clear" bindtap="onClearSearch">✕</view>
+      </view>
+      <!-- 联想结果列表 -->
+      <view wx:if="{{suggestList.length > 0}}" class="suggest-list">
+        <view class="suggest-item" wx:for="{{suggestList}}" wx:key="creditCode" data-item="{{item}}" bindtap="onSelectEnterprise">
+          <view class="suggest-name">{{item.enterpriseName || item.name}}</view>
+          <view class="suggest-code">{{item.creditCode || item.id}}</view>
+          <view class="suggest-port" wx:if="{{item.primaryPort}}">{{item.primaryPort}}</view>
+        </view>
+      </view>
+      <view wx:elif="{{searchKeyword && suggestList.length === 0}}" class="search-empty">
+        <text>{{t.pages.report.noMatch}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 报告状态：无数据且无搜索 -->
+  <view wx:if="{{!hasData && !loading && !showSearch}}">
+    <view class="empty-report card">
+      <view class="empty-icon">📋</view>
+      <view class="empty-title">{{t.pages.report.empty}}</view>
+      <view class="empty-action" bindtap="onGenerate">
+        <text class="action-icon">🔍</text>
+        <text class="action-text">{{t.common.search}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 报告内容 - 优化 -->
+  <view wx:if="{{hasData}}">
+    <!-- 企业基本信息 -->
+    <view class="card">
+      <view class="section-header">
+        <text class="section-title">🏢 {{t.pages.report.basic}}</text>
+      </view>
+      <view class="info-list">
+        <view class="info-item">
+          <view class="info-icon">📛</view>
+          <view class="info-content">
+            <text class="info-label">{{t.common.enterprise}}</text>
+            <text class="info-value">{{reportInfo.enterpriseName || '--'}}</text>
+          </view>
+        </view>
+        <view class="info-item">
+          <view class="info-icon">🔢</view>
+          <view class="info-content">
+            <text class="info-label">{{t.pages.report.fields[0]}}</text>
+            <text class="info-value">{{reportInfo.regNo || '--'}}</text>
+          </view>
+        </view>
+        <view class="info-item">
+          <view class="info-icon">👤</view>
+          <view class="info-content">
+            <text class="info-label">{{t.pages.report.fields[1]}}</text>
+            <text class="info-value">{{reportInfo.legalPerson || '--'}}</text>
+          </view>
+        </view>
+        <view class="info-item">
+          <view class="info-icon">💰</view>
+          <view class="info-content">
+            <text class="info-label">{{t.pages.report.fields[2]}}</text>
+            <text class="info-value">{{reportInfo.regCapital || '--'}}</text>
+          </view>
+        </view>
+        <view class="info-item">
+          <view class="info-icon">📅</view>
+          <view class="info-content">
+            <text class="info-label">{{t.pages.report.fields[3]}}</text>
+            <text class="info-value">{{reportInfo.establishDate || '--'}}</text>
+          </view>
+        </view>
+        <view class="info-item">
+          <view class="info-icon">🌍</view>
+          <view class="info-content">
+            <text class="info-label">{{t.pages.report.fields[4]}}</text>
+            <text class="info-value">{{reportInfo.country || '--'}}</text>
+          </view>
+        </view>
+        <view class="info-item">
+          <view class="info-icon">✅</view>
+          <view class="info-content">
+            <text class="info-label">{{t.pages.report.fields[5]}}</text>
+            <text class="info-value" style="color: {{reportInfo.statusKey === 'normal' ? '#67C23A' : '#F56C6C'}}">
+              {{reportInfo.status || '--'}}
+            </text>
+          </view>
+        </view>
+        <view class="info-item">
+          <view class="info-icon">📋</view>
+          <view class="info-content">
+            <text class="info-label">{{t.pages.report.fields[6]}}</text>
+            <text class="info-value">{{reportInfo.businessScope || '--'}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 风控评分概览 - 优化 -->
+    <view class="card">
+      <view class="section-header">
+        <text class="section-title">📊 {{t.pages.report.overview}}</text>
+      </view>
+      <view class="score-overview">
+        <view class="score-circle {{reportInfo.riskLevelKey === 'high' ? 'score-high' : reportInfo.riskLevelKey === 'medium' ? 'score-medium' : 'score-low'}}">
+          <text class="score-number">{{reportInfo.riskScore || '--'}}</text>
+        <text class="score-unit">{{t.common.score}}</text>
+        </view>
+        <view class="score-level-badge {{reportInfo.riskLevelKey === 'high' ? 'risk-badge-high' : reportInfo.riskLevelKey === 'medium' ? 'risk-badge-medium' : 'risk-badge-low'}}">
+          {{reportInfo.riskLevelText || t.common.low}}
+        </view>
+      </view>
+    </view>
+
+    <!-- 保存报告图片 -->
+      <button class="poster-btn" bindtap="onSavePoster">📸 {{t.pages.report.save}}</button>
+
+    <!-- 风险维度分析 - 优化 -->
+    <view class="card" wx:if="{{reportInfo.dimensions && reportInfo.dimensions.length > 0}}">
+      <view class="section-header">
+      <text class="section-title">📈 {{t.pages.report.dimensions}}</text>
+      </view>
+      <view class="dimension-list">
+        <view class="dimension-item" wx:for="{{reportInfo.dimensions}}" wx:key="name">
+          <view class="dimension-header">
+            <view class="dimension-dot" style="background: {{item.color || '#2B6FF7'}}"></view>
+            <text class="dim-name">{{item.name}}</text>
+            <text class="dim-score">{{item.value}}{{t.common.score}}</text>
+          </view>
+          <view class="progress-bar">
+            <view class="progress-fill" style="width: {{item.value}}%; background: {{item.color || '#2B6FF7'}}"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 风险事项 - 优化 -->
+    <view class="card" wx:if="{{reportInfo.riskItems && reportInfo.riskItems.length > 0}}">
+      <view class="section-header">
+      <text class="section-title">⚠️ {{t.pages.report.items}}</text>
+      </view>
+      <view class="risk-list">
+        <view class="risk-item" wx:for="{{reportInfo.riskItems}}" wx:key="index">
+          <view class="risk-header">
+            <text class="risk-item-title">{{item.title}}</text>
+            <view class="risk-tag {{item.level === 'high' ? 'tag-danger' : item.level === 'medium' ? 'tag-warning' : 'tag-info'}}">
+              {{item.levelText}}
+            </view>
+          </view>
+          <text class="risk-item-desc">{{item.description}}</text>
+          <view class="risk-footer">
+            <text class="risk-item-date">📅 {{item.date}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 数据来源声明 - 优化 -->
+  <view class="data-source" wx:if="{{hasData}}">
+    <view class="source-header">
+      <text class="source-icon">📊</text>
+      <text class="source-title">{{t.pages.report.sourceTitle}}</text>
+    </view>
+    <view class="source-content">
+      {{t.pages.report.sourceBody}}
+    </view>
+    <view class="source-footer">
+      <text class="source-time">{{t.pages.report.sourceGenerateTime}}{{reportInfo.generateTime || '--'}}</text>
+      <text class="source-notice">{{t.pages.report.sourceNotice}}</text>
+    </view>
+  </view>
+
+  <data-source />
+
+  <!-- 报告长图画布（离屏） -->
+  <canvas type="2d" id="posterCanvas" class="poster-canvas"></canvas>
+</view>

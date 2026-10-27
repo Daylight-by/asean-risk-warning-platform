@@ -1,0 +1,18 @@
+-- Curated UI summaries for official ATR policy entries; original URL remains visible.
+SET NAMES utf8mb4;
+
+INSERT INTO t_multilingual_content (business_type,business_id,field_name,source_language,source_text,locale,translated_text,translation_status,verification_status)
+VALUES
+('policy','19','title','en','Wholesome Meat (Import, Export and Transhipment) Regulations 2011','en','Wholesome Meat (Import, Export and Transhipment) Regulations 2011','source_original','source_checked'),
+('policy','19','summary','zh','官方 ATR 条目显示：进口冷冻清真肉须取得进口许可；应以原始法规及主管部门最新要求为准。该记录保留英文原始法规名称与官方链接。','en','ATR entry: imported frozen halal meat requires an import licence. Consult the underlying regulation and the competent authority for current requirements.','human_curated','source_checked'),
+('policy','20','title','en','Export/Import Bulletin (4/2024) — non-automatic import licence','en','Export/Import Bulletin (4/2024) — non-automatic import licence','source_original','source_checked'),
+('policy','20','summary','zh','官方 ATR 条目显示：该公告对 1,460 个 HS 10 位税目实施非自动进口许可；具体税目和有效性应以缅甸国家贸易门户最新公告为准。','en','ATR entry: this bulletin applies non-automatic import licensing to 1,460 HS 10-digit tariff lines. Consult Myanmar’s National Trade Repository for current tariff lines and validity.','human_curated','source_checked'),
+('policy','21','title','en','Singapore import labelling requirements for meat and fish products','en','Singapore import labelling requirements for meat and fish products','source_original','source_checked'),
+('policy','21','summary','zh','官方 ATR 条目列出：进口肉类或鱼类产品标签应包含产品描述、原产国、品牌及加工、包装、批次、净重等信息；以主管部门最新规定为准。','en','ATR entry: labels for imported meat or fish products must include product description, origin, brand, processing and packing details, batch and net weight. Consult the source for current rules.','human_curated','source_checked'),
+('policy','19','title','en','Wholesome Meat (Import, Export and Transhipment) Regulations 2011','vi','Quy định về thịt lành mạnh (nhập khẩu, xuất khẩu và chuyển tải) năm 2011','human_curated','source_checked'),
+('policy','19','summary','zh','官方 ATR 条目显示：进口冷冻清真肉须取得进口许可；应以原始法规及主管部门最新要求为准。该记录保留英文原始法规名称与官方链接。','vi','Theo mục ATR, việc nhập khẩu thịt halal đông lạnh cần có giấy phép nhập khẩu. Hãy đối chiếu văn bản gốc và yêu cầu mới nhất của cơ quan có thẩm quyền.','human_curated','source_checked'),
+('policy','20','title','en','Export/Import Bulletin (4/2024) — non-automatic import licence','vi','Bản tin xuất/nhập khẩu (4/2024) — giấy phép nhập khẩu không tự động','human_curated','source_checked'),
+('policy','20','summary','zh','官方 ATR 条目显示：该公告对 1,460 个 HS 10 位税目实施非自动进口许可；具体税目和有效性应以缅甸国家贸易门户最新公告为准。','vi','Theo mục ATR, bản tin này áp dụng giấy phép nhập khẩu không tự động cho 1.460 dòng thuế HS 10 chữ số. Hãy tham chiếu Cổng thông tin thương mại quốc gia Myanmar để biết danh mục và hiệu lực hiện hành.','human_curated','source_checked'),
+('policy','21','title','en','Singapore import labelling requirements for meat and fish products','vi','Yêu cầu ghi nhãn của Singapore đối với thịt và sản phẩm cá nhập khẩu','human_curated','source_checked'),
+('policy','21','summary','zh','官方 ATR 条目列出：进口肉类或鱼类产品标签应包含产品描述、原产国、品牌及加工、包装、批次、净重等信息；以主管部门最新规定为准。','vi','Theo mục ATR, nhãn thịt hoặc sản phẩm cá nhập khẩu cần có mô tả sản phẩm, xuất xứ, nhãn hiệu, thông tin chế biến và đóng gói, số lô và khối lượng tịnh. Hãy tham chiếu nguồn chính thức để cập nhật quy định.','human_curated','source_checked')
+ON DUPLICATE KEY UPDATE translated_text=VALUES(translated_text), translation_status=VALUES(translation_status), verification_status=VALUES(verification_status), translated_at=CURRENT_TIMESTAMP;

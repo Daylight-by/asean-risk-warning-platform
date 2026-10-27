@@ -1,0 +1,259 @@
+{
+  "checkedAt": "2026-08-13",
+  "root": "E:\\bisai\\data",
+  "fileCount": 35,
+  "totalBytes": 913806,
+  "jsonValid": 12,
+  "htmlSnapshotsValid": 23,
+  "aseanCountryCoverage": [
+    "bn",
+    "id",
+    "kh",
+    "la",
+    "mm",
+    "my",
+    "ph",
+    "sg",
+    "th",
+    "vn"
+  ],
+  "missingAseanCountries": [],
+  "exactDuplicateGroups": [],
+  "errors": [],
+  "files": [
+    {
+      "file": "aseanstats-international-sea-cargo-throughput.json",
+      "bytes": 49178,
+      "sha256": "c787886ac0ccda5413979f945337bc14ecdb54da25566e6de8b77d3b3692883d",
+      "format": ".json",
+      "topType": "list",
+      "itemCount": 180
+    },
+    {
+      "file": "aseanstats_international_air_cargo_latest-20260809.json",
+      "bytes": 81110,
+      "sha256": "d4a5b1057298ac73d429a87438b1df0f6ea955229af4eeceef4207c1c6856fab",
+      "format": ".json",
+      "topType": "list",
+      "itemCount": 206
+    },
+    {
+      "file": "aseanstats_international_sea_cargo_latest-20260809.json",
+      "bytes": 70785,
+      "sha256": "dfa42880b5e984bfccfd2ee42cd4608fb670e9bdd5220189cf508a48f42c63bd",
+      "format": ".json",
+      "topType": "list",
+      "itemCount": 180
+    },
+    {
+      "file": "aseanstats_international_sea_container_latest-20260809.json",
+      "bytes": 61234,
+      "sha256": "4c93a0292cb5f35ed8d1c5971bf5950d71e33ad3a430731bfb3656c1dbda155a",
+      "format": ".json",
+      "topType": "list",
+      "itemCount": 156
+    },
+    {
+      "file": "atr-ntr-official-directory-20260809.html",
+      "bytes": 19305,
+      "sha256": "45a0bac0851af97cb8c4d3d0348cc0d110b7a660c1623b63978685ae2d22fb56",
+      "format": ".html"
+    },
+    {
+      "file": "atr-ntr-official-directory-20260809.json",
+      "bytes": 2635,
+      "sha256": "0c59050638b587ecf366fa0b45a29a570de196003f84f586616f025e0ad9571a",
+      "format": ".json",
+      "topType": "dict",
+      "itemCount": 8
+    },
+    {
+      "file": "atr-policy-directory-10-countries-2-topics-20260809.json",
+      "bytes": 15379,
+      "sha256": "63df8acc34bef5ad26257f4d1e1a55a908dbf7933ce8720d7bf05c497e738740",
+      "format": ".json",
+      "topType": "list",
+      "itemCount": 20
+    },
+    {
+      "file": "atr-policy-directory-bn-topic-45-20260809.html",
+      "bytes": 10951,
+      "sha256": "4eb47e02352aca22d1e3d247a42f1283da27399986cd845dcfa270268d3af6e6",
+      "format": ".html"
+    },
+    {
+      "file": "atr-policy-directory-bn-topic-46-20260809.html",
+      "bytes": 11926,
+      "sha256": "14730d792fc32b38dd76ac0950d70e9060848de51f2a46161daa2dba1bd526e2",
+      "format": ".html"
+    },
+    {
+      "file": "atr-policy-directory-id-topic-45-20260809.html",
+      "bytes": 13891,
+      "sha256": "8812a87b4237c75a553148782827676a30a61b1b0b158dcc38abdae9a310bdd8",
+      "format": ".html"
+    },
+    {
+      "file": "atr-policy-directory-id-topic-46-20260809.html",
+      "bytes": 13771,
+      "sha256": "602e9b4a2508aba257d2af05b6be5bd41e78ff9b64cdba3344e35f1beb0ed31a",
+      "format": ".html"
+    },
+    {
+      "file": "atr-policy-directory-kh-topic-45-20260809.html",
+      "bytes": 24436,
+      "sha256": "05081abb85d818583a4aabbc7b96c25d6be775d028f698bbdb933a9c7ee0a295",
+      "format": ".html"
+    },
+    {
+      "file": "atr-policy-directory-kh-topic-46-20260809.html",
+      "bytes": 17290,
+      "sha256": "9d204cf398ba5b1e753e6cad9bbfc18244aa2306ac7f1a86a1e31dc5a4efda0a",
+      "format": ".html"
+    },
+    {
+      "file": "atr-policy-directory-la-topic-45-20260809.html",
+      "bytes": 14085,
+      "sha256": "3c7b9c6fda1b624a58b3a226d50e0d6896c551392ef87180ac4f511d4a4e03dd",
+      "format": ".html"
+    },
+    {
+      "file": "atr-policy-directory-la-topic-46-20260809.html",
+      "bytes": 13773,
+      "sha256": "23eb00b7993bcd09c848d0393a337a9cfd43fb2e24dfe420a462f9d993a43945",
+      "format": ".html"
+    },
+    {
+      "file": "atr-policy-directory-mm-topic-45-20260809.html",
+      "bytes": 7424,
+      "sha256": "80f11521a9de8b1188abf8a3c8c0b88fec4646f11c6e9e8057563d940effa3db",
+      "format": ".html"
+    },
+    {
+      "file": "atr-policy-directory-mm-topic-46-20260809.html",
+      "bytes": 7484,
+      "sha256": "9df96b97b259f3de8e7a4125582ad11ce52d0d41c02f69fd628f61e56e52ce9c",
+      "format": ".html"
+    },
+    {
+      "file": "atr-policy-directory-my-topic-45-20260809.html",
+      "bytes": 16861,
+      "sha256": "544868763834ad224e81fa56cce59fd804bcd3018d0e4c55c8fe4565dcaab482",
+      "format": ".html"
+    },
+    {
+      "file": "atr-policy-directory-my-topic-46-20260809.html",
+      "bytes": 17356,
+      "sha256": "57bacd93855aac0b8fd5090ff8dca83f619e92d5d682c0e288400df6e1cd3802",
+      "format": ".html"
+    },
+    {
+      "file": "atr-policy-directory-ph-topic-45-20260809.html",
+      "bytes": 7428,
+      "sha256": "de761de4851e12a430ff85eff7e414cc0dec10a574732bc3b99ec4e01d80b7a3",
+      "format": ".html"
+    },
+    {
+      "file": "atr-policy-directory-ph-topic-46-20260809.html",
+      "bytes": 7488,
+      "sha256": "a1b8d22e25b120120b2029935bc53d4aefb035285552674126032a09ec36a35f",
+      "format": ".html"
+    },
+    {
+      "file": "atr-policy-directory-sg-topic-45-20260809.html",
+      "bytes": 14293,
+      "sha256": "a188ad64730f6195effd62f7d6935fc251700d6ef8d1f357df1f5e1b6212096c",
+      "format": ".html"
+    },
+    {
+      "file": "atr-policy-directory-sg-topic-46-20260809.html",
+      "bytes": 12751,
+      "sha256": "1086f8803eaca3d84a9d70b933f0bcf8e4fbc03c627434a72b2973753a4788c8",
+      "format": ".html"
+    },
+    {
+      "file": "atr-policy-directory-th-topic-45-20260809.html",
+      "bytes": 16413,
+      "sha256": "d2bdafde88370f35d82bea426b69bcfd8f8021262701b912c84ecef9a7087204",
+      "format": ".html"
+    },
+    {
+      "file": "atr-policy-directory-th-topic-46-20260809.html",
+      "bytes": 11752,
+      "sha256": "930b8bc8cc2ed569b283949686c5acf524692426ac67c12e16e7110ccb22685f",
+      "format": ".html"
+    },
+    {
+      "file": "atr-policy-directory-vn-topic-45-20260809.html",
+      "bytes": 7424,
+      "sha256": "61a72ac793faec5b559640888bf0d369623d5bcbf193e36c4331778512bb4765",
+      "format": ".html"
+    },
+    {
+      "file": "atr-policy-directory-vn-topic-46-20260809.html",
+      "bytes": 7484,
+      "sha256": "7ff9329e6bc014809a706ca3eb270c378ba4a8c3da02e13b3b9467cd3f104234",
+      "format": ".html"
+    },
+    {
+      "file": "comtrade-china-asean-2023-preview.json",
+      "bytes": 9927,
+      "sha256": "9ff2f2cc47c16663635e2dfaf515a650a6446d7d50b06d7f79a1397ac58f1c50",
+      "format": ".json",
+      "topType": "dict",
+      "itemCount": 4
+    },
+    {
+      "file": "comtrade-china-asean-2024-preview-normalized.json",
+      "bytes": 31228,
+      "sha256": "d8d1bd72db7de1476a1f084bc1351f68b68c44590048be38d57e139278f809d0",
+      "format": ".json",
+      "topType": "list",
+      "itemCount": 11
+    },
+    {
+      "file": "comtrade-china-asean-2024-preview.json",
+      "bytes": 23324,
+      "sha256": "2e0c73f73aeb823e668ab7a23e3603bff8b22c13f95043547f9a469f8b48860b",
+      "format": ".json",
+      "topType": "dict",
+      "itemCount": 4
+    },
+    {
+      "file": "comtrade-china-vietnam-2023-preview.json",
+      "bytes": 957,
+      "sha256": "7abf05b5b72f4f3d0b4c8598b8bf446b2d84fa4b496728a9a7c98885baf0362c",
+      "format": ".json",
+      "topType": "dict",
+      "itemCount": 4
+    },
+    {
+      "file": "guangxi-port-official-pages-20260809.json",
+      "bytes": 4143,
+      "sha256": "3ba0ea2591886a03443c55f9786072bba7f9e0732db3b3c826939f4a554c5b75",
+      "format": ".json",
+      "topType": "list",
+      "itemCount": 2
+    },
+    {
+      "file": "gx-border-ports-2024-raw-20260809.html",
+      "bytes": 74035,
+      "sha256": "a10ebaee8c7dbddda20ec939265fc8a991228ec7765103fa29792ca46c031640",
+      "format": ".html"
+    },
+    {
+      "file": "gx-port-2024-transport-raw-20260809.html",
+      "bytes": 208764,
+      "sha256": "a19d75c7306c2b591130a57a288ba2a2295c18a9b9d94ae8fff27ea931e52b46",
+      "format": ".html"
+    },
+    {
+      "file": "official-asean-crawl-manifest-20260809.json",
+      "bytes": 7521,
+      "sha256": "3d8bac5b389f34e949ba1f16eb87bc5b0bd4f63b551bd49342122a7dded78e89",
+      "format": ".json",
+      "topType": "dict",
+      "itemCount": 5
+    }
+  ]
+}

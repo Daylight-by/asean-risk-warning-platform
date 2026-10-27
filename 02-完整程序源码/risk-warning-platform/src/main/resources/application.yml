@@ -1,0 +1,85 @@
+server:
+  port: 8080
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/plain,text/css,application/javascript,image/svg+xml
+    min-response-size: 1024
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+spring:
+  application:
+    name: risk-warning-platform
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/risk_warning?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:risk_warning_2026}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      timeout: 3000ms
+
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+
+mybatis:
+  type-aliases-package: com.risk.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+risk:
+  scorecard:
+    base-score: 30.0
+    high-risk-threshold: 40.0
+    medium-risk-threshold: 70.0
+  warning:
+    scan-cron: "0 0 2 * * ?"
+
+# 外部数据源API配置（海关/税务/工商）
+external-api:
+  customs:
+    # Leave blank until an authorized endpoint is supplied by the operator.
+    url:
+    key:
+  tax:
+    url:
+    key:
+  business:
+    url:
+    key:
+
+# ============ AI 风控助手配置 ============
+# provider: mock(默认,无模型依赖,基于真实业务数据生成回复) | ollama(本地大模型) | cloud(云模型预留)
+# 现场答辩/录视频时设环境变量 AI_PROVIDER=ollama 即可切到本地 qwen2:1.5b
+ai:
+  provider: mock
+  ollama:
+    url: ${AI_OLLAMA_URL:-http://localhost:11434/api/chat}
+    model: qwen2:1.5b
+
+# ============ 认证鉴权配置 ============
+# demo: 演示模式开关。默认 false（安全）。仅演示时可设环境变量 APP_AUTH_DEMO=true 开启，
+#       开启后任意账号可登录但只获得 user 角色（无管理写权限），管理员仍走 BCrypt 校验。
+# admin-password-hash: 管理员密码的 BCrypt 哈希（当前对应明文 123456）。
+#       生产环境请更换密码并用 BCrypt 重新生成哈希，通过环境变量 APP_AUTH_ADMIN_HASH 注入。
+# token-secret: Token 签名密钥，生产环境务必通过环境变量 APP_AUTH_SECRET 覆盖。
+app:
+  auth:
+    demo: ${APP_AUTH_DEMO:false}
+    admin-username: ${APP_AUTH_ADMIN_USER:admin}
+    admin-password-hash: ${APP_AUTH_ADMIN_HASH:$2a$10$gKbkdF.Un0pI1trtNeiAkeE5EnqTA5.hl11zdgIAeto9dsd0TbS8.}
+    token-secret: ${APP_AUTH_SECRET:risk-platform-default-secret-change-me}
+    token-expire-minutes: ${APP_AUTH_EXPIRE:120}

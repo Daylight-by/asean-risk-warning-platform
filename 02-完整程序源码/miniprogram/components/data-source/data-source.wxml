@@ -1,0 +1,10 @@
+<view class="ds-wrap">
+  <view class="ds-title" wx:if="{{source}}">📊 {{source}}</view>
+  <view class="ds-badges">
+    <view class="ds-badge ds-badge-1">演示数据</view>
+    <view class="ds-badge ds-badge-2">拟接入公共数据</view>
+    <view class="ds-badge ds-badge-3">来源可追溯</view>
+    <view class="ds-badge ds-badge-4">跨境脱敏</view>
+  </view>
+  <view class="ds-note">当前版本以脱敏样例数据演示完整流程；正式接入后将逐项登记公共数据目录编号、授权依据与更新时间</view>
+</view>
